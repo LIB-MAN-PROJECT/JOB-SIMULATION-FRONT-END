@@ -1,9 +1,15 @@
-import React from 'react'
+import RecruiterNavbar from "../pages/recruiter/components/RecruiterNavbar";
+import { Outlet } from "react-router";
 
-const RecruiterLayouts = () => {
+const RecruiterLayouts = ({ children }) => {
   return (
-    <div>RecruiterLayouts</div>
-  )
-}
+    <div className="flex">
+      <RecruiterNavbar />
+      <main className="ml-72 w-full p-6 min-h-screen">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
-export default RecruiterLayouts
+export default RecruiterLayouts;
