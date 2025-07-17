@@ -1,7 +1,8 @@
 import K from "../../../constants";
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [isTransparent, setIsTransparent] = useState(true);

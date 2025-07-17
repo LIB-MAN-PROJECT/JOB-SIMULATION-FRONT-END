@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { simulations } from "../../../db/Data";
 
 const SimulationTable = () => {
@@ -9,7 +7,7 @@ const SimulationTable = () => {
   //   axios.get("/api/simulations")
   //     .then((res) => {
   //       console.log("API response:", res.data);
-  //       setSimulations(res.data); 
+  //       setSimulations(res.data);
   //     })
   //     .catch((error) => {
   //       console.error("Error fetching simulations:", error);
@@ -52,7 +50,9 @@ const SimulationTable = () => {
                 <td className="p-3">
                   <span
                     className={`px-2 py-1 text-sm rounded ${
-                      sim.isHiring ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"
+                      sim.isHiring
+                        ? "bg-green-200 text-green-800"
+                        : "bg-red-200 text-red-800"
                     }`}
                   >
                     {sim.isHiring ? "Yes" : "No"}
@@ -61,16 +61,24 @@ const SimulationTable = () => {
                 <td className="p-3">
                   <span
                     className={`px-2 py-1 text-sm rounded ${
-                      sim.isPublished ? "bg-blue-200 text-blue-800" : "bg-yellow-200 text-yellow-800"
+                      sim.isPublished
+                        ? "bg-blue-200 text-blue-800"
+                        : "bg-yellow-200 text-yellow-800"
                     }`}
                   >
                     {sim.isPublished ? "Yes" : "No"}
                   </span>
                 </td>
                 <td className="p-3 space-x-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-sm">View</button>
-                  <button className="bg-yellow-500 text-white px-2 py-1 rounded text-sm">Edit</button>
-                  <button className="bg-red-500 text-white px-2 py-1 rounded text-sm">Delete</button>
+                  <button className="bg-blue-500 text-white px-2 py-1 rounded text-sm">
+                    View
+                  </button>
+                  <button className="bg-yellow-500 text-white px-2 py-1 rounded text-sm">
+                    Edit
+                  </button>
+                  <button className="bg-red-500 text-white px-2 py-1 rounded text-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
