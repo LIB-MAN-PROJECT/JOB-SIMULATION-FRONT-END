@@ -46,7 +46,7 @@ const Hero = () => {
           <div>
             <Link to="/simulations">
               <button className="mt-4 px-6 py-3 text-sm md:text-base font-semibold bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-md shadow-lg hover:shadow-purple-800/50 transition-all duration-300">
-                Start Exploring
+                Explore Our Simulations
               </button>
             </Link>
           </div>

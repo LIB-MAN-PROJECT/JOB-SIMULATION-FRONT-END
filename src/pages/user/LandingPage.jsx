@@ -1,18 +1,17 @@
-
 import Hero from "./components/Hero";
 import Experience from "./Experience";
 import Features from "./Features";
 import FutureBuild from "./FutureBuild";
-import Team from "./Team";
+import HowItWorks from "./HowItWorks";
 
 const LandingPage = () => {
   return (
-    <div >
+    <div>
       <Hero />
-      <Experience/>
-      <Features/>
-      <Team/>
-      <FutureBuild/>
+      <Experience />
+      <Features />
+      <HowItWorks />
+      <FutureBuild />
     </div>
   );
 };
