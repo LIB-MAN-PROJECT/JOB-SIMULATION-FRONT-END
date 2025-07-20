@@ -26,6 +26,7 @@ import About from "./pages/user/About.jsx";
 import HowItWorks from "./pages/user/HowItWorks.jsx";
 import Team from "./pages/user/Team.jsx";
 import ContactPage from "./components/Contact.jsx";
+import InternshipGrid from "./pages/recruiter/InternGrid.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -60,7 +61,7 @@ function App() {
     },
     {
       path: "/internships",
-      element: <InternshipCardList />,
+      element: <InternshipGrid />,
     },
     {
       path: "/recruiters",
@@ -69,6 +70,14 @@ function App() {
     {
       path: "/simulations",
       element: <SimulationTable />,
+    },
+    {
+      path: "/login",
+      element: <LogIn />,
+    },
+    {
+      path: "/sign-up",
+      element: <SignUp />,
     },
     {
       path: "/",
@@ -91,14 +100,7 @@ function App() {
           path: "internship",
           element: <InternshipLandingPage />,
         },
-        {
-          path: "login",
-          element: <LogIn />,
-        },
-        {
-          path: "sign-up",
-          element: <SignUp />,
-        },
+
         {
           path: "mentorship",
           element: <MentorLanding />,

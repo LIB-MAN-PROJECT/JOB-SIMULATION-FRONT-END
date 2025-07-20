@@ -1,110 +1,117 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useForm } from 'react-hook-form';
 import { apiLogin } from '../../services/auth';
-import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
-import { Link } from 'react-router';
-
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import loginGraphic from '../../assets/experience.jpeg'; // Place a sleek image here
+import Navbar from '../user/components/Navbar';
 
 const LogIn = () => {
-     const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const isError = Object.keys(errors).length > 0;
-  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data) => {
-    const payload = {
-      email: data.email,
-      password: data.password,
-    };
+    const payload = { email: data.email, password: data.password };
     setIsSubmitting(true);
-
     try {
-        const res = await apiLogin(payload);
-        localStorage.setItem("accessToken", res.data.token);
-         const userRole = res.data.user.role;
+      const res = await apiLogin(payload);
+      localStorage.setItem("accessToken", res.data.token);
+      const userRole = res.data.user.role;
       toast.success(res.data.message || "Logged In Successfully!");
-      if (userRole === "recruiter") {
-        navigate("/dashboard");
-      } else {
-        navigate("/");
-      }
-
+      navigate(userRole === "recruiter" ? "/dashboard" : "/");
     } catch (error) {
-          toast.error(error?.message || "Failed. Try Again");
+      toast.error(error?.message || "Failed. Try Again");
     } finally {
       setIsSubmitting(false);
     }
-    };
-
+  };
 
   return (
-    
-    <div className="relative bg-black z-10 flex items-center justify-center min-h-screen px-4">
-        <div className="w-full max-w-md p-6 rounded-lg ">
-          <h2 className="text-2xl font-bold mb-6 text-center text-white">Log In</h2>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                className=" text-white w-full p-2 border border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                {...register("email", { required: "Email address required" })}
-              />
-              {errors?.email && (
-                <span className="text-red-500 text-sm">{errors.email.message}</span>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full p-2 border text-white border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                {...register("password", { required: "Password is required" })}
-              />
-              {errors?.password && (
-                <span className="text-red-500 text-sm">{errors.password.message}</span>
-              )}
-            </div>
-
-            <div className="text-center">
-              <Link to="/forgot-password" className="text-sm text-white hover:underline">
-                Forgot Password?
-              </Link>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isError || isSubmitting}
-              className={`w-full p-2 rounded text-white transition ${
-                isError
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-green-600 hover:bg-green-700"
-              }`}
-            >
-              {isSubmitting ? "Logging in..." : "Login"}
-            </button>
-
-            <p className="text-center text-sm text-white">
-              Don't have an account?{" "}
-              <Link to="/sign-up" className="text-green hover:underline">
-                Sign Up
-              </Link>
-            </p>
-          </form>
-        </div>
+    <section className="min-h-screen bg-[#f9f4ee] flex items-center justify-center relative overflow-hidden px-6 py-20">
+      <Navbar/>
+      {/* Glow + Overlay Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={loginGraphic}
+          alt="Login Graphic"
+          className="w-full h-full object-cover opacity-70"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-500/50 to-orange-500/40 mix-blend-overlay"></div>
       </div>
-    
-  )
-}
 
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 bg-white/80 backdrop-blur-md shadow-2xl rounded-3xl w-full max-w-3xl p-10 md:p-14"
+      >
+        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+          Welcome <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-orange-500">Back</span>
+        </h2>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              {...register("email", { required: "Email address required" })}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
+          </div>
+
+          <div className="text-right text-sm">
+            <Link to="/forgot-password" className="text-orange-500 hover:underline">
+              Forgot Password?
+            </Link>
+          </div>
+
+          {/* Login Button */}
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            disabled={isError || isSubmitting}
+            className={`w-full py-3 rounded-lg text-white font-semibold text-lg transition-all ${
+              isError
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-600 hover:to-orange-600"
+            }`}
+          >
+            {isSubmitting ? "Logging in..." : "Log In"}
+          </motion.button>
+
+          <p className="text-center text-sm text-gray-700 mt-4">
+            Don’t have an account?{" "}
+            <Link to="/sign-up" className="text-orange-500 font-semibold hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </motion.div>
+    </section>
+  );
+};
 
 export default LogIn;

@@ -1,7 +1,23 @@
+import { motion } from "framer-motion";
 import works1 from "../../assets/works1.mp4";
 import works2 from "../../assets/works2.mp4";
 import works3 from "../../assets/works3.mp4";
 import { FaUserFriends, FaKey, FaRegSmile } from "react-icons/fa";
+
+// Animation Variants
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
 
 const steps = [
   {
@@ -34,10 +50,17 @@ const HowItWorks = () => {
         How It Works
       </h2>
 
-      <div className="grid gap-10 md:grid-cols-3">
+      <motion.div
+        className="grid gap-10 md:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {steps.map((step, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={cardVariants}
             className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-500 group relative"
           >
             {/* Video Section */}
@@ -66,9 +89,9 @@ const HowItWorks = () => {
                 {step.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

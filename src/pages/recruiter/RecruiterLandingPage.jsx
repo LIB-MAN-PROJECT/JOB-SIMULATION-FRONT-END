@@ -6,7 +6,6 @@ const RecruiterLandingPage = () => {
   return (
     <div>
       <RecruiterHero />
-      <RecruiterHowItWorks />
       <RecruiterFuture/>
     </div>
   );
