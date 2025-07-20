@@ -1,4 +1,3 @@
-import React from "react";
 import works1 from "../../assets/works1.mp4";
 import works2 from "../../assets/works2.mp4";
 import works3 from "../../assets/works3.mp4";
@@ -30,8 +29,8 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="bg-black py-24 px-6 md:px-20">
-      <h2 className="text-4xl font-extrabold text-center mb-16 text-white">
+    <section className="bg-white py-24 px-6 md:px-20">
+      <h2 className="text-4xl md:text-5xl font-serif font-bold text-center mb-16 text-gray-900">
         How It Works
       </h2>
 
@@ -39,26 +38,28 @@ const HowItWorks = () => {
         {steps.map((step, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-md overflow-hidden border border-orange-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 group relative"
+            className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-500 group relative"
           >
-            <div className="relative w-full h-60 overflow-hidden">
+            {/* Video Section */}
+            <div className="relative w-full h-64 overflow-hidden rounded-t-2xl">
               <video
-                className="w-full h-full object-cover group-hover:brightness-100 brightness-50 transition duration-500"
+                className="w-full h-full object-cover group-hover:brightness-100 brightness-75 transition duration-500"
                 src={step.video}
                 autoPlay
                 muted
                 loop
                 playsInline
               />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-transparent transition duration-500">
-                <span className="text-white text-4xl opacity-80 group-hover:opacity-0 transition duration-500">
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition duration-500">
+                <span className="text-white text-4xl opacity-90 group-hover:opacity-0 transform group-hover:scale-125 transition-all duration-500">
                   {step.icon}
                 </span>
               </div>
             </div>
 
+            {/* Text Section */}
             <div className="p-6 text-center">
-              <h3 className="text-xl font-extrabold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-2">
+              <h3 className="text-xl font-bold bg-gradient-to-r from-[#f59e0b] to-[#14b8a6] bg-clip-text text-transparent mb-2">
                 {step.title}
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">

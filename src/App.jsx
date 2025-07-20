@@ -22,17 +22,18 @@ import CompanyTable from "./pages/admin/compoments/CompanyTable";
 import InternshipCardList from "./pages/admin/compoments/InternshipTable";
 import Recruiters from "./pages/admin/Recruiters";
 import SimulationTable from "./pages/admin/compoments/Simulations";
+import About from "./pages/user/About.jsx";
+import HowItWorks from "./pages/user/HowItWorks.jsx";
+import Team from "./pages/user/Team.jsx";
+import ContactPage from "./components/Contact.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/login",
-      element: <LogIn />,
+      path: "/how-it-works",
+      element: <HowItWorks />,
     },
-    {
-      path: "/sign-up",
-      element: <SignUp />,
-    },
+    { path: "/contact", element: <ContactPage /> },
     {
       path: "/admin-sidebar",
       element: <AdminSidebar />,
@@ -77,13 +78,26 @@ function App() {
           index: true,
           element: <LandingPage />,
         },
+        { path: "about-us/meet-the-team", element: <Team /> },
+        {
+          path: "about",
+          element: <About />,
+        },
         {
           path: "recruiter-dashboard",
           element: <RecruiterLandingPage />,
         },
         {
-          path: "internships",
+          path: "internship",
           element: <InternshipLandingPage />,
+        },
+        {
+          path: "login",
+          element: <LogIn />,
+        },
+        {
+          path: "sign-up",
+          element: <SignUp />,
         },
         {
           path: "mentorship",

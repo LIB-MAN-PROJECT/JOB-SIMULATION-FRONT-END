@@ -1,63 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
-
-import heroImage1 from "../../../assets/hero-students.jpg";
-import heroImage2 from "../../../assets/internship.jpeg";
-import heroImage3 from "../../../assets/mentorship.jpeg";
-
-const images = [heroImage1, heroImage2, heroImage3];
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import heroImage1 from "../../../assets/hero-students.jpg"; // makeup photo
+import heroImage2 from "../../../assets/experience.jpg"; // mannequins photo
 
 const Hero = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Automatically rotate images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2000); // 5 seconds
-
-    return () => clearInterval(interval); // cleanup
-  }, []);
-
   return (
-    <section className="bg-black text-white pt-24 pb-16 px-6 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-
-        {/* Left Content */}
-        <div className="flex-1 text-center md:text-left space-y-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-            Launch Your{" "}
-            <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text">
-              Career
-            </span>{" "}
-            with <br className="hidden md:block" />
-            Real-World{" "}
-            <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text">
-              Simulations
-            </span>
+    <section className="bg-[#f9f4ee] min-h-screen flex items-center overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+        {/* Left Text Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="space-y-8"
+        >
+          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-gray-900 leading-snug">
+            Explore job simulations from real companies,<br />
+            build hands-on skills — all in one platform.
           </h1>
 
-          <p className="text-base md:text-lg text-gray-300 max-w-xl">
-            Explore tasks from top companies, earn{" "}
-            <span className="text-purple-400 font-medium">verifiable certificates</span>, and apply
-            for <span className="text-blue-400 font-medium">real internships</span> — all in one place.
-          </p>
+          <div className="flex flex-col sm:flex-row gap-6 pt-2">
+            {/* Employers Button */}
+            <div className="space-y-1">
+              <p className="text-xs uppercase text-gray-500 font-medium">Employers</p>
+              <Link to="/simulations">
+                <button className="group flex items-center px-6 py-3 bg-teal-600 text-white font-semibold rounded-md hover:bg-teal-700 transition">
+                  Browse Simulations
+                  <svg
+                    className="ml-2 w-5 h-5 transform transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </Link>
+            </div>
 
-          <div>
-            <Link to="/simulations">
-              <button className="mt-4 px-6 py-3 text-sm md:text-base font-semibold bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-md shadow-lg hover:shadow-purple-800/50 transition-all duration-300">
-                Explore Our Simulations
-              </button>
-            </Link>
+            {/* Educators Button */}
+            <div className="space-y-1">
+              <p className="text-xs uppercase text-gray-500 font-medium">Educators</p>
+              <Link to="/how-it-works">
+                <button className="group flex items-center px-6 py-3 bg-white text-teal-600 font-semibold rounded-md border border-teal-500 hover:bg-teal-50 transition">
+                  How it works
+                  <svg
+                    className="ml-2 w-5 h-5 transform transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right Image */}
-        <div className="flex-1 overflow-hidden rounded-xl shadow-lg group max-w-xl">
-          <img
-            src={images[currentImageIndex]}
-            alt="Students working"
-            className="w-full h-full object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-xl"
+        {/* Right Image Section – staggered */}
+        <div className="relative flex gap-6">
+          <motion.img
+            src={heroImage1}
+            alt="Makeup tools"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="w-56 h-[360px] object-cover rounded-lg shadow-lg"
+          />
+          <motion.img
+            src={heroImage2}
+            alt="Mannequins"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="w-56 h-[360px] object-cover rounded-lg shadow-lg mt-10"
           />
         </div>
       </div>
@@ -66,3 +85,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

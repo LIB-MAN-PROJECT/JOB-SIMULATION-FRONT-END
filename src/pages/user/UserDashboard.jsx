@@ -1,4 +1,4 @@
-import React from "react";
+
 import { user } from "../../constants";
 
 const UserDashboard = () => {

@@ -1,47 +1,64 @@
-import experienceImg from "../../assets/experience.jpeg";
+import { motion } from "framer-motion";
+import { CheckCircle, Briefcase, Sparkles, Globe } from "lucide-react"; // Icons from lucide-react
 
-const Experience = () => {
+const features = [
+  {
+    icon: <Briefcase className="w-8 h-8 text-teal-600" />,
+    title: "Real Projects",
+    desc: "Gain experience by working on actual business simulations from real companies.",
+  },
+  {
+    icon: <Sparkles className="w-8 h-8 text-teal-600" />,
+    title: "Skill-Based Learning",
+    desc: "Develop practical, job-ready skills that employers look for — not just theory.",
+  },
+  {
+    icon: <CheckCircle className="w-8 h-8 text-teal-600" />,
+    title: "Verified Certificates",
+    desc: "Get recognized with credible, downloadable proof of every simulation you complete.",
+  },
+  {
+    icon: <Globe className="w-8 h-8 text-teal-600" />,
+    title: "Anywhere, Anytime",
+    desc: "Learn on your schedule from anywhere — no classroom required.",
+  },
+];
+
+const WhyChooseUs = () => {
   return (
-    <section className="bg-black text-white py-24 px-6">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <section className="bg-white py-24 px-6">
+      <div className="max-w-7xl mx-auto text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-serif font-semibold text-gray-900 mb-14"
+        >
+          Why students choose us
+        </motion.h2>
 
-        {/* // Heading */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center leading-snug">
-          Gain{" "}
-          <span className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
-            Hands-on Experience
-          </span>{" "}
-          from <span className="text-white">Anywhere</span>
-        </h2>
-
-        {/* // Main row: image + text */}
-        <div className="flex flex-col md:flex-row items-center gap-8">
-
-          {/* // Left: Image section */}
-          <div className="flex-1 rounded-xl border border-white bg-white overflow-hidden">
-            <img
-              src={experienceImg}
-              alt="Team collaborating"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-            />
-          </div>
-
-          {/* // Right: Narrow content block centered inside its half */}
-          <div className="flex-1 flex justify-center">
-            <div className="w-full max-w-md bg-black border border-white/30 rounded-xl p-6">
-              <p className="text-gray-300 leading-relaxed text-base">
-                Simulations are designed by real companies and tailored to fields like{" "}
-                <span className="text-purple-400 italic font-medium">Marketing</span>,{" "}
-                <span className="text-purple-400 italic font-medium">Finance</span>, and{" "}
-                <span className="text-purple-400 italic font-medium">IT</span>. Collaborate in teams,
-                upload your solutions, and receive personalized feedback — all from anywhere.
-              </p>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {features.map((feature, i) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              viewport={{ once: true }}
+              className="bg-[#f9f4ee] rounded-xl p-6 text-left shadow-sm hover:shadow-md transition-all"
+            >
+              <div className="mb-4">{feature.icon}</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-gray-600">{feature.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default Experience;
+export default WhyChooseUs;
