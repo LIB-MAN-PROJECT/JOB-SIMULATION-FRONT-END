@@ -85,6 +85,10 @@ function App() {
       path: "/recruiter-dashboard",
       element: <RecruiterDashboard/>,
     },
+    {
+      path: "/add-simulation",
+      element: <AddSimulationForm/>,
+    },
   {
     path: "/add-tasks",
     element: <AddTasksForm/>,

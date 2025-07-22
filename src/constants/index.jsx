@@ -87,7 +87,7 @@ const K = {
     {
       icon: <HomeIcon />,
       text: "DASHBOARD",
-      path: "/dashboard",
+      path: "/recruiter-dashboard",
     },
     {
       icon: <FcReading />,
@@ -119,7 +119,7 @@ const K = {
     {
       icon: <HomeIcon />,
       text: "DASHBOARD",
-      path: "/dashboard",
+      path: "/recruiter-dashboard",
     },
     {
       icon: <FcReading />,
@@ -129,7 +129,7 @@ const K = {
     {
       icon: <FcBriefcase />,
       text: "WANT TO ADD A SIMULATION",
-      path: "/dashboard/applications",
+      path: "/add-simulation",
     },
 
     {
