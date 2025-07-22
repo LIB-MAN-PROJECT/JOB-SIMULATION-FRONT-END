@@ -1,63 +1,77 @@
-import { user } from "../../../constants";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LogOut, UserCircle2, Settings2 } from "lucide-react";
+import { user } from "../../../constants";
+import { motion } from "framer-motion";
 
 const UserProfileSidebar = () => {
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
   };
+
   return (
-    <div className="bg-white shadow-md w-72 h-screen fixed left-0 top-0 p-6 flex flex-col justify-between z-50 border-r border-orange-200 text-gray-800">
-      <div className="flex items-center justify-center mb-10">
-        <Link to="/">
-          <span className="text-3xl font-extrabold text-black/65 tracking-wide">
-            Career<span className="text-purple-400">Launch</span>
-          </span>
+    <motion.aside
+      initial={{ x: -40, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white w-72 h-screen fixed left-0 top-0 p-6 flex flex-col justify-between border-r border-teal-100 z-50 shadow-md"
+    >
+      {/* Logo */}
+      <div className="text-center mb-10">
+        <Link to="/" className="text-3xl font-extrabold text-slate-800">
+          Career<span className="text-teal-500">Launch</span>
         </Link>
       </div>
-      <NavLink
-        className={({ isActive }) =>
-          `flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
-            isActive
-              ? "bg-orange-500 text-white shadow-md"
-              : "text-gray-600 hover:bg-orange-100 hover:text-orange-600"
-          }`
-        }
-      >
-        <UserCircle2 size={20} />
-        <span>Profile</span>
-      </NavLink>
 
-      <nav className="flex flex-col gap-4">
-        {user.USERSIDEBAR.map(({ icon, title, path }) => (
-          <NavLink
-            key={title}
-            to={path}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-orange-500 text-white shadow-md"
-                  : "text-gray-600 hover:bg-orange-100 hover:text-orange-600"
-              }`
-            }
-            end
-          >
-            <span className="text-xl">{icon}</span>
-            <span>{title}</span>
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="mt-8 border-t border-orange-100 pt-6 space-y-4">
+      {/* Profile Nav */}
+      <div className="space-y-6">
         <NavLink
-          to="/vendor/settings"
+          to="/user/profile"
           className={({ isActive }) =>
-            `flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
+            `flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
               isActive
-                ? "bg-orange-500 text-white shadow-md"
-                : "text-gray-600 hover:bg-orange-100 hover:text-orange-600"
+                ? "bg-gradient-to-r from-teal-500 to-orange-400 text-white shadow-md"
+                : "text-slate-700 hover:bg-teal-50"
+            }`
+          }
+        >
+          <UserCircle2 size={20} />
+          <span>Profile</span>
+        </NavLink>
+
+        {/* Main Nav */}
+        <nav className="flex flex-col gap-3">
+          {user.USERSIDEBAR.map(({ icon, title, path }) => (
+            <NavLink
+              key={title}
+              to={path}
+              end
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
+                  isActive
+                    ? "bg-gradient-to-r from-teal-500 to-orange-400 text-white shadow-md"
+                    : "text-slate-700 hover:bg-teal-50"
+                }`
+              }
+            >
+              <span className="text-xl">{icon}</span>
+              <span>{title}</span>
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+
+      {/* Footer Controls */}
+      <div className="mt-8 border-t border-gray-100 pt-6 space-y-4">
+        <NavLink
+          to="/user/settings"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-2 rounded-lg font-medium transition-all ${
+              isActive
+                ? "bg-gradient-to-r from-teal-500 to-orange-400 text-white"
+                : "text-slate-700 hover:bg-teal-50"
             }`
           }
         >
@@ -66,7 +80,7 @@ const UserProfileSidebar = () => {
         </NavLink>
 
         <button
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-red-500 text-base hover:bg-red-100 transition"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-red-500 hover:bg-red-50 font-medium transition"
           onClick={handleLogout}
         >
           <LogOut size={18} />
@@ -74,10 +88,10 @@ const UserProfileSidebar = () => {
         </button>
       </div>
 
-      <div className="mt-6 text-xs text-center text-gray-400">
+      <p className="text-xs text-center text-slate-400 mt-6">
         &copy; 2025 CareerLaunch
-      </div>
-    </div>
+      </p>
+    </motion.aside>
   );
 };
 

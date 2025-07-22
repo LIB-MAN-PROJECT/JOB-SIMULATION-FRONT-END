@@ -70,7 +70,7 @@ const K = {
       path: "/internship",
     },
     {
-      text: "RECRUITER DASHBOARD",
+      text: "RECRUITERS",
       path: "/recruiter-dashboard",
     },
     {
@@ -778,32 +778,34 @@ export const user = {
       title: "View All Applications",
       path: "/user/all-applications",
     },
+     {
+      icon: <FaTools className="text-xl text-blue-500" />,
+      title: "View All Enrollments",
+      path: "/user/all-enrollments",
+    },
     {
       icon: <FaChartBar className="text-xl text-blue-500" />,
       title: "Track All Progress",
       path: "/user/track-progress",
     },
 
-    {
-      icon: <FaComments className="text-xl text-blue-500" />,
-      title: "Leave A Review",
-      path: "/user/review",
-    },
+   
   ],
   USERDASHBOARD: [
     {
       icon: <FcProcess className="text-xl text-blue-500" />,
       title: "View All Applications",
-      description: "Advertise verified internship or job opportunities.",
+      description:
+        "View all verified internship or job opportunities applied for by yourself.",
+    },
+    {
+      icon: <FcProcess className="text-xl text-blue-500" />,
+      title: "View All Enrolments",
+      description: "View all verified  job simulations enrolled in by yourself",
     },
     {
       icon: <FcProcess className="text-xl text-blue-500" />,
       title: "Track Your Progress",
-      description: "Advertise verified internship or job opportunities.",
-    },
-    {
-      icon: <FcProcess className="text-xl text-blue-500" />,
-      title: "Leave A Review",
       description: "Advertise verified internship or job opportunities.",
     },
   ],

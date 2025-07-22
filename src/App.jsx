@@ -27,6 +27,12 @@ import HowItWorks from "./pages/user/HowItWorks.jsx";
 import Team from "./pages/user/Team.jsx";
 import ContactPage from "./components/Contact.jsx";
 import InternshipGrid from "./pages/recruiter/InternGrid.jsx";
+import UserProfile from "./pages/user/UserProfilePage.jsx";
+import Applications from "./pages/user/UserApplications.jsx";
+import UserSimulations from "./pages/user/UserSimulations.jsx";
+import UserCertificates from "./pages/user/Certificates.jsx";
+import UserSettings from "./pages/user/UserSettings.jsx";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -127,6 +133,29 @@ function App() {
         {
           index: true,
           element: <UserDashboard />,
+        },
+        {
+          path: "profile",
+          element: <UserProfile />,
+        },
+        {
+          path: "all-applications",
+          element: <Applications />,
+        },
+         {
+          path: "all-enrollments",
+          element: <UserSimulations />,
+        
+        },
+         {
+          path: "track-progress",
+          element: <UserCertificates />,
+        
+        },
+         {
+          path: "settings",
+          element: <UserSettings />,
+        
         },
       ],
     },
