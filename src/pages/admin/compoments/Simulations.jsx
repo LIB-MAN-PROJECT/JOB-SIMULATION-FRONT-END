@@ -69,13 +69,11 @@ const SimulationTable = () => {
                     {sim.isPublished ? "Yes" : "No"}
                   </span>
                 </td>
-                <td className="p-3 space-x-2">
+                <td className="p-3 flex gap-3 mt-3 space-x-2">
                   <button className="bg-blue-500 text-white px-2 py-1 rounded text-sm">
                     View
                   </button>
-                  <button className="bg-yellow-500 text-white px-2 py-1 rounded text-sm">
-                    Edit
-                  </button>
+                  
                   <button className="bg-red-500 text-white px-2 py-1 rounded text-sm">
                     Delete
                   </button>

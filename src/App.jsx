@@ -32,6 +32,10 @@ import Applications from "./pages/user/UserApplications.jsx";
 import UserSimulations from "./pages/user/UserSimulations.jsx";
 import UserCertificates from "./pages/user/Certificates.jsx";
 import UserSettings from "./pages/user/UserSettings.jsx";
+import RecruiterProfilePage from "./pages/recruiter/RecruiterProfilePage.jsx";
+import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard.jsx";
+import AddTasksForm from "./pages/recruiter/AddTask.jsx";
+import AddSimulationForm from "./pages/recruiter/CreateSimulation.jsx";
 
 
 function App() {
@@ -73,6 +77,18 @@ function App() {
       path: "/recruiters",
       element: <Recruiters />,
     },
+    {
+      path: "?recruiter-profile",
+      element: <RecruiterProfilePage/>,
+    },
+    {
+      path: "/recruiter-dashboard",
+      element: <RecruiterDashboard/>,
+    },
+  {
+    path: "/add-tasks",
+    element: <AddTasksForm/>,
+  },
     {
       path: "/simulations",
       element: <SimulationTable />,
@@ -167,6 +183,10 @@ function App() {
           index: true,
           element: <RecruiterHero />,
         },
+         {
+          path: "/recruiter/add",
+          element: <AddSimulationForm/>,
+        }
       ],
     },
   ]);

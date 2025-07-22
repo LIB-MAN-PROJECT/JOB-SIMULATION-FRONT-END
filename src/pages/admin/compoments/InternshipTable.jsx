@@ -1,4 +1,5 @@
 import React from "react";
+import AdminSidebar from "./AdminSidebar";
 
 const internships = [
   {
@@ -32,7 +33,9 @@ const internships = [
 
 export default function InternshipCardList() {
   return (
-    <div className="p-4">
+    <>
+    <AdminSidebar/>
+    <div className="p-4 mt-10 ml-67">
       <h2 className="text-2xl font-semibold mb-4">Internship Opportunities</h2>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {internships.map((internship) => (
@@ -40,6 +43,7 @@ export default function InternshipCardList() {
             key={internship.id}
             className="bg-white rounded-xl shadow p-5 hover:shadow-lg transition"
           >
+            
             <h3 className="text-lg font-bold text-gray-800">
               {internship.title}
             </h3>
@@ -66,5 +70,6 @@ export default function InternshipCardList() {
         ))}
       </div>
     </div>
+    </>
   );
 }

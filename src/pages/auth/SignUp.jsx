@@ -8,8 +8,20 @@ import signUpImage from "../../assets/experience.jpg"; // Add a matching image h
 
 import { apiSignUp } from "../../services/auth";
 import Navbar from "../user/components/Navbar";
+import axios from "axios";
 
 const SignUp = () => {
+    const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [companyName, setCompanyName] = useState("");
+  const [companyCode, setCompanyCode] = useState("");
+  const [logo, setLogo] = useState("");
+  const [description, setDescription] = useState("");
+  const [website, setWebsite] = useState("");
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
@@ -23,20 +35,31 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     const payload = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
+       firstName,
+     lastName,
+     userName,
+      email,
+      password,
       role: state,
       ...(state === "recruiter" && { companyId: data.companyId }),
     };
 
     setIsSubmitting(true);
     try {
-      await apiSignUp(payload);
-      toast.success("User Registered Successfully");
+       const res = await axios.post(
+        "https://job-simulation-backend-3e6w.onrender.com/api/auth/signup",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res);
+    toast.success("User Registered Successfully");
       navigate("/login");
     } catch (error) {
+      console.log(error);
       toast.error(error?.message || "Error occurred");
     } finally {
       setIsSubmitting(false);
@@ -95,7 +118,11 @@ const SignUp = () => {
             <div>
               <label className="text-sm font-medium">First Name</label>
               <input
-                {...register("firstName", { required: "Required" })}
+                type="text"
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
                 className="w-full border p-2 rounded"
               />
               {errors.firstName && (
@@ -106,11 +133,29 @@ const SignUp = () => {
             <div>
               <label className="text-sm font-medium">Last Name</label>
               <input
-                {...register("lastName", { required: "Required" })}
+              type="text"
+          name="lastName"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
                 className="w-full border p-2 rounded"
               />
               {errors.lastName && (
                 <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+              )}
+            </div>
+            <div>
+              <label className="text-sm font-medium">User Name</label>
+              <input
+               type="text"
+          name="userName"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+                className="w-full border p-2 rounded"
+              />
+              {errors.userName && (
+                <p className="text-red-500 text-sm">{errors.userName.message}</p>
               )}
             </div>
           </div>
@@ -120,13 +165,11 @@ const SignUp = () => {
             <label className="text-sm font-medium">Email</label>
             <input
               type="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: "Invalid email",
-                },
-              })}
+             
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
               className="w-full border p-2 rounded"
             />
             {errors.email && (
@@ -139,10 +182,11 @@ const SignUp = () => {
             <label className="text-sm font-medium">Password</label>
             <input
               type="password"
-              {...register("password", {
-                required: "Required",
-                minLength: { value: 6, message: "Min 6 characters" },
-              })}
+              
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
               className="w-full border p-2 rounded"
             />
             {errors.password && (
@@ -173,12 +217,20 @@ const SignUp = () => {
               {companyAction === "join" && (
                 <>
                   <input
-                    {...register("companyname")}
+                    type="text"
+                name="companyName"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+                required
                     placeholder="Company Name"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    {...register("companyId")}
+                    type="text"
+                name="companyCode"
+                value={companyCode}
+                onChange={(e) => setCompanyCode(e.target.value)}
+                required
                     placeholder="Company Code"
                     className="w-full border p-2 rounded"
                   />
@@ -192,27 +244,42 @@ const SignUp = () => {
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    {...register("companyName")}
+                    type="text"
+                  name="companyName"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  required
                     placeholder="Company Name"
                     className="w-full border p-2 rounded"
                   />
-                  <input
+                  {/* <input
                     {...register("companyEmail")}
                     placeholder="Company Email"
                     className="w-full border p-2 rounded"
-                  />
+                  /> */}
                   <input
-                    {...register("companyCode")}
+                    type="text"
+                  name="companyCode"
+                  value={companyCode}
+                  onChange={(e) => setCompanyCode(e.target.value)}
+                  required
                     placeholder="Company Code"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    {...register("description")}
+                     type="text"
+                  name="email"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                     placeholder="Description"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    {...register("website")}
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  required
                     placeholder="Website"
                     className="w-full border p-2 rounded"
                   />
