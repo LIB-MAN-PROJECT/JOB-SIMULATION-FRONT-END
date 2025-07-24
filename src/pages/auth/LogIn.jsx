@@ -36,13 +36,13 @@ const LogIn = () => {
           },
         }
       );
-        localStorage.setItem("accessToken", res.data.token);
+        localStorage.setItem("accesstoken", res.data.token);
          const userRole = res.data.user.role;
       toast.success(res.data.message || "Logged In Successfully!");
       
       
-      if (!userRole) {
-        navigate("/recruiters");
+      if (userRole === "recruiter") {
+        navigate("/recruiter");
       } else {
         navigate("/");
       }

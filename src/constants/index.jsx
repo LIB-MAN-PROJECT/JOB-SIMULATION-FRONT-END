@@ -1,4 +1,4 @@
-import { HomeIcon, FileText, Users, HelpCircle } from "lucide-react";
+import { HomeIcon, FileText, Users, HelpCircle, LayoutDashboard, BookOpenCheck, Briefcase, UserPen } from "lucide-react";
 import { FcBriefcase, FcProcess, FcReading } from "react-icons/fc";
 import { FaTools, FaChartBar, FaBullhorn, FaComments } from "react-icons/fa";
 
@@ -71,7 +71,7 @@ const K = {
     },
     {
       text: "RECRUITERS",
-      path: "/recruiter-dashboard",
+      path: "/recruiter",
     },
     {
       text: "MENTORSHIPS",
@@ -117,25 +117,63 @@ const K = {
   ],
   RECRUITERLINKS: [
     {
-      icon: <HomeIcon />,
+      icon: <LayoutDashboard size={18} />,
       text: "DASHBOARD",
       path: "/recruiter-dashboard",
     },
     {
-      icon: <FcReading />,
+      icon: <BookOpenCheck size={18} />,
       text: "MY SIMULATIONS",
-      path: "/dashboard/simulations",
+      path: "/my-simulations",
     },
+     {
+      icon: <BookOpenCheck size={18} />,
+      text: "MY INTERNSHIPS",
+      path: "/my-internships",
+    },
+    // {
+    //   icon: <BookOpenCheck size={18} />,
+    //   text: "MY INTERNSHIPS",
+    //   path: "/my-internships",
+    // },
+   
     {
-      icon: <FcBriefcase />,
-      text: "WANT TO ADD A SIMULATION",
+      icon: <BookOpenCheck size={18} />,
+      text: "ADD SIMULATION",
       path: "/add-simulation",
     },
+   
+    {
+      icon: <Briefcase size={18} />,
+      text: "CREATE INTERNSHIP",
+      path: "/create-internship",
+    },
+    {
+      icon: <FileText size={18} />,
+      text: "CERTIFICATES",
+      path: "/issued-certificates",
+    },
+    {
+      icon: <FileText size={18} />,
+      text: "ENROLLMENTS",
+      path: "/completed-enrollments",
+    },
+    {
+      icon: <FileText size={18} />,
+      text: "REVIEW C.E",
+      path: "/review-enrollments",
+    },
+    {
+      icon: <UserPen size={20} />,
+      text: "PROFILE",
+      path: "/recruiter-profile",
+    },
+
 
     {
       icon: <HelpCircle />,
       text: "NEED HELP?",
-      path: "/dashboard/help",
+      path: "/contact",
     },
   ],
   ADMINLINKS: [

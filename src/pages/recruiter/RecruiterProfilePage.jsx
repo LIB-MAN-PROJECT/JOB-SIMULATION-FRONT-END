@@ -48,7 +48,7 @@ const RecruiterProfilePage = () => {
       <RecruiterNavbar/>
       <div className="min-h-screen w-490 md:ml-50 bg-[#EAEBFF]">
         {/* <Navbar /> */}
-        <nav className=" flex justify-between items-center text-black bg-white fixed w-267 right-0 vendnav h-15">
+        <nav className=" flex justify-between items-center text-black bg-white fixed w-275 right-0 vendnav h-15">
           <div className="realtive ml-5">
             <input
               type="text"

@@ -15,13 +15,14 @@ import LogIn from "./pages/auth/LogIn";
 import SignUp from "./pages/auth/SignUp";
 import AdminSidebar from "./pages/admin/compoments/AdminSidebar";
 import AdminSettings from "./pages/admin/AdminSettings";
-import CertificateTable from "./pages/admin/compoments/CertificateTable";
-import CertificatesIssued from "./pages/admin/CertificateIssued";
+import CertificatesIssued from "./pages/recruiter/CertificateIssued.jsx";
+import CertificateTable from "./pages/recruiter/CertificatesTable.jsx"
+
 import AdminDashboard from "./pages/admin/Dashboard";
 import CompanyTable from "./pages/admin/compoments/CompanyTable";
-import InternshipCardList from "./pages/admin/compoments/InternshipTable";
-import Recruiters from "./pages/admin/Recruiters";
-import SimulationTable from "./pages/admin/compoments/Simulations";
+// import InternshipCardList from "./pages/admin/compoments/InternshipTable";
+import Recruiters from "./pages/admin/Verify.jsx";
+// import SimulationTable from "./pages/admin/compoments/Simulations";
 import About from "./pages/user/About.jsx";
 import HowItWorks from "./pages/user/HowItWorks.jsx";
 import Team from "./pages/user/Team.jsx";
@@ -36,6 +37,14 @@ import RecruiterProfilePage from "./pages/recruiter/RecruiterProfilePage.jsx";
 import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard.jsx";
 import AddTasksForm from "./pages/recruiter/AddTask.jsx";
 import AddSimulationForm from "./pages/recruiter/CreateSimulation.jsx";
+import CreateInternship from "./pages/recruiter/CreateInternship.jsx";
+import Verify from "./pages/admin/Verify.jsx";
+import CertificatesTable from "./pages/recruiter/CertificatesTable.jsx";
+import CompletedEnrollments from "./pages/recruiter/CompletedEnrollments.jsx";
+import ReviewCompletedEnrollment from "./pages/recruiter/ReviewCompletedEnrollments.jsx";
+import GenerateCertificatePage from "./pages/recruiter/GenerateCertificateModal.jsx";
+import InternshipCardList from "./pages/recruiter/MyInternships.jsx";
+import MySimulations from "./pages/recruiter/MySimulations.jsx";
 
 
 function App() {
@@ -54,24 +63,28 @@ function App() {
       element: <AdminSettings />,
     },
     {
-      path: "/certificates-issued",
+      path: "/issued-certificates",
       element: <CertificatesIssued />,
     },
     {
       path: "/certificate-table",
-      element: <CertificateTable />,
+      element: <CertificatesTable/>,
     },
     {
       path: "/admin",
       element: <AdminDashboard />,
     },
     {
+      path: "/verify-recruiters",
+      element: <Verify/>,
+    },
+    {
       path: "/company-table",
       element: <CompanyTable />,
     },
     {
-      path: "/internships",
-      element: <InternshipGrid />,
+      path: "/my-internships",
+      element: <InternshipCardList />,
     },
     {
       path: "/recruiters",
@@ -89,14 +102,32 @@ function App() {
       path: "/add-simulation",
       element: <AddSimulationForm/>,
     },
+    {
+      path: "/create-internship",
+      element: <CreateInternship/>,
+    },
+    {
+      path: "/completed-enrollments",
+      element: <CompletedEnrollments/>,
+    },
+    {
+      path: "/review-enrollments/:id",
+      element: <ReviewCompletedEnrollment/>,
+    },
+    
   {
-    path: "/add-tasks",
+    path: "/generate-cert",
+    element: <GenerateCertificatePage/>,
+  },
+  {
+    path: "/add-tasks/:id",
     element: <AddTasksForm/>,
   },
     {
-      path: "/simulations",
-      element: <SimulationTable />,
+      path: "/my-simulations",
+      element: <MySimulations />,
     },
+    
     {
       path: "/login",
       element: <LogIn />,

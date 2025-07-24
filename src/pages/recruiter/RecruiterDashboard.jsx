@@ -1,4 +1,5 @@
 import RecruiterNavbar from "./components/RecruiterNavbar";
+import RNavbar from "./components/RNavbar";
 
 const RecruiterDashboard = () => {
   return (
@@ -7,7 +8,7 @@ const RecruiterDashboard = () => {
               <RecruiterNavbar/>
         </div>
         <div className="flex-1 flex flex-col ml-70">
-
+<RNavbar/>
         
       <h1 className="text-2xl font-bold mb-6">Welcome, Recruiter 👋</h1>
 
