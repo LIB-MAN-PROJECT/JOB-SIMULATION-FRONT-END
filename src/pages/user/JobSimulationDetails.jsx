@@ -1,6 +1,12 @@
-import { useParams, useNavigate } from "react-router";
-import K from "../../constants";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { fetchSimulationById } from "../../services/jobs";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import VerifiedBadge from "../../components/VerificationBadge";
+import { handleError } from "../../services/handleError";
+import TaskAccordion from "./Accordion";
+import { HashLink } from "react-router-hash-link";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -12,17 +18,56 @@ const fadeInUp = {
 const JobSimulationDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const job = K.JOBSIMULATIONS.find((j) => j._id === id);
+  const location = useLocation();
+
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // allow viewing simulation details without redirect, only restrict "Start Simulation"
+      fetchSimulationById(id)
+        .then((data) => setJob(data.data))
+        .catch((err) => handleError(err))
+        .finally(() => setLoading(false));
+    } else {
+      fetchSimulationById(id)
+        .then((data) => setJob(data.data))
+        .catch((err) => handleError(err))
+        .finally(() => setLoading(false));
+    }
+  }, [id]);
+
+  const handleStartSimulation = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login", {
+        state: { from: `/simulations/${id}` },
+      });
+      return;
+    }
+    setHasStarted(true);
+  };
+
+  if (loading) {
+    return (
+      <div className="pt-24 flex justify-center items-center min-h-screen bg-[#f9f4ee]">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   if (!job) {
     return (
-      <div className="pt-24 px-4 text-center min-h-screen bg-black text-white">
+      <div className="pt-24 px-4 text-center min-h-screen bg-[#f9f4ee] text-black">
         <h2 className="text-xl font-semibold text-red-500">
           Job Simulation not found.
         </h2>
         <button
           onClick={() => navigate(-1)}
-          className="mt-4 text-teal-400 underline"
+          className="mt-4 text-teal-600 underline"
         >
           Go Back
         </button>
@@ -31,7 +76,7 @@ const JobSimulationDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f9f4ee]">
+    <div className="min-h-screen bg-[#f9f4ee] pb-32">
       {/* Hero Section */}
       <div className="relative w-full h-[85vh]">
         <img
@@ -50,7 +95,10 @@ const JobSimulationDetails = () => {
               <h1 className="text-4xl font-bold tracking-tight leading-snug">
                 {job.title}
               </h1>
-              <p className="mt-3 text-lg text-white/80">{job.companyName}</p>
+              <p className="mt-2 text-lg text-white/90 flex items-center gap-2">
+                {job.companyName}
+                {job.companyStatus === "verified" && <VerifiedBadge />}
+              </p>
               <p className="mt-4 text-gray-300 max-w-xl">{job.description}</p>
               <div className="mt-4 text-sm space-x-4 text-gray-300">
                 <span>{job.field}</span> • <span>{job.level}</span> •{" "}
@@ -70,75 +118,75 @@ const JobSimulationDetails = () => {
               )}
               <h3 className="text-lg font-bold mb-2">Launch Your Career</h3>
               <ul className="text-sm text-gray-700 mb-4 space-y-2">
-                <li>🚀 Experience real work in {job.duration} hrs, at your pace.</li>
-                <li>🎯 Stand out to recruiters at <strong>{job.companyName}</strong>.</li>
+                <li>
+                  🚀 Experience real work in {job.duration} hrs, at your pace.
+                </li>
+                <li>
+                  🎯 Stand out to recruiters at{" "}
+                  <strong>{job.companyName}</strong>.
+                </li>
                 <li>💼 Add this to your resume or LinkedIn.</li>
               </ul>
-              <button className="w-full bg-gradient-to-r from-teal-500 to-teal-700 text-white py-2 rounded-md hover:shadow-lg hover:scale-105 transition font-semibold">
-                Start Free Simulation
-              </button>
+              <HashLink
+                scroll={(el) =>
+                  el.scrollIntoView({ behavior: "smooth", block: "end" })
+                }
+                to="#tasks"
+              >
+                <button
+                  onClick={handleStartSimulation}
+                  className="w-full bg-gradient-to-r from-teal-500 to-teal-700 text-white py-2 rounded-md hover:shadow-lg hover:scale-105 transition font-semibold"
+                >
+                  Start Free Simulation
+                </button>
+              </HashLink>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 mt-12 space-y-16 pb-24">
-        {/* Overview */}
-        <motion.section {...fadeInUp}>
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Overview</h2>
-          <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-sm text-gray-700 leading-relaxed">
-            {job.overview}
-          </div>
-        </motion.section>
+      <div className="max-w-6xl mx-auto px-6 mt-16 space-y-16 scroll-mt-[300px]">
+        {hasStarted ? (
+          <>
+            {/* Overview */}
+            <motion.section {...fadeInUp}>
+              <h2 className="text-2xl font-bold text-slate-900 mb-4">
+                Overview
+              </h2>
+              <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-sm text-gray-700 leading-relaxed">
+                {job.description}
+              </div>
+            </motion.section>
 
-        {/* Tasks */}
-        {job.tasks?.length > 0 && (
-          <motion.section {...fadeInUp}>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Your Mission</h2>
-            <ul className="bg-white p-6 rounded-xl shadow-md border border-gray-100 text-sm list-disc pl-6 space-y-2 text-gray-700">
-              {job.tasks.map((task, idx) => (
-                <li key={idx}>{task}</li>
-              ))}
-            </ul>
-          </motion.section>
+            {/* Tasks */}
+            <motion.section {...fadeInUp} id="tasks">
+              <div className="max-w-3xl mx-auto p-6">
+                <h1 className="text-2xl font-bold mb-6">Task List</h1>
+                {job.tasks.map((task, index) => (
+                  <TaskAccordion
+                    key={index}
+                    taskNumber={task.taskNumber}
+                    title={task.title}
+                    isCompleted={task.isCompleted}
+                    content={task.content}
+                    resources={task.resources}
+                  />
+                ))}
+              </div>
+            </motion.section>
+          </>
+        ) : (
+          <div className="text-center text-gray-600 mt-20">
+            <p className="text-lg font-medium">
+              Click the{" "}
+              <span className="text-teal-600 font-semibold">
+                "Start Free Simulation"
+              </span>{" "}
+              button above to begin and view the tasks.
+            </p>
+          </div>
         )}
-
-        {/* How It Works */}
-        <motion.section {...fadeInUp} className="bg-gradient-to-br from-teal-50 to-white p-8 rounded-xl shadow-md border border-teal-100">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-gray-800">
-            {[
-              {
-                step: "1",
-                title: "Explore & Enroll",
-                desc: "Browse simulations that match your interests. It’s free.",
-              },
-              {
-                step: "2",
-                title: "Complete at Your Pace",
-                desc: "Work through real-world tasks without deadlines.",
-              },
-              {
-                step: "3",
-                title: "Showcase Your Growth",
-                desc: "Display your certificate and stand out to employers.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                {...fadeInUp}
-                transition={{ delay: 0.2 * index, duration: 0.6, ease: "easeOut" }}
-              >
-                <div className="text-3xl text-teal-600 font-bold mb-3">
-                  {item.step}
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
       </div>
     </div>
   );

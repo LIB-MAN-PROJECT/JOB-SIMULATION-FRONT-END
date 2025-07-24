@@ -4,58 +4,48 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import signUpImage from "../../assets/experience.jpg"; // Add a matching image here
-import { apiSignUp } from "../../services/auth";
-import Navbar from "../user/components/Navbar";
 import axios from "axios";
 
-const SignUp = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyCode, setCompanyCode] = useState("");
-  const [logo, setLogo] = useState("");
-  const [logoPublicId, setLogoPublicId] = useState("");
-  const [description, setDescription] = useState("");
-  const [website, setWebsite] = useState("");
-  const [role, setRole] = useState("");
-  const [adom, setAdom] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
-  const [companyCustomId, setCompanyCustomId] = useState("");
+import signUpImage from "../../assets/experience.jpg";
+import Navbar from "../user/components/Navbar";
 
-  const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const SignUp = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm({ shouldUnregister: true });
+  } = useForm();
 
-  const [state, setState] = useState("student");
+  const [role, setRole] = useState("student");
   const [companyAction, setCompanyAction] = useState(null);
-  const me = "recruiter";
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
     const payload = {
-      firstName,
-      lastName,
-      userName,
-      email,
-      password,
-      companyName,
-      companyCode,
-      description,
-      website,
-
-      role: me,
-      // ...(state === "recruiter" && { companyId: data.companyId }),
+      firstName: data.firstName,
+      lastName: data.lastName,
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
+      role,
+      ...(role === "recruiter" && companyAction === "join" && {
+        companyCustomId: data.companyCustomId,
+        companyCode: data.companyCode,
+      }),
+      ...(role === "recruiter" && companyAction === "create" && {
+        // companyCustomId: data.companyCustomId,
+        companyCode: data.companyCode,
+        companyName: data.companyName,
+        companyEmail: data.companyEmail,
+        description: data.description,
+        website: data.website,
+      }),
     };
 
-    setIsSubmitting(true);
     try {
+      setIsSubmitting(true);
       const res = await axios.post(
         "https://job-simulation-backend-3e6w.onrender.com/api/auth/signup",
         data,
@@ -65,12 +55,10 @@ const SignUp = () => {
           },
         }
       );
-      console.log(res);
       toast.success("User Registered Successfully");
       navigate("/login");
     } catch (error) {
-      console.log(error);
-      toast.error(error?.message || "Error occurred");
+      toast.error(error?.response?.data?.message || "Registration failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -136,16 +124,16 @@ const SignUp = () => {
     <section className="min-h-screen bg-[#f9f4ee] py-20 px-6">
       <Navbar />
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        {/* Left Graphic */}
+        {/* Image */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.7 }}
           className="hidden md:block"
         >
           <img
             src={signUpImage}
-            alt="Sign Up Graphic"
+            alt="Sign Up"
             className="w-full h-auto rounded-xl shadow-lg"
           />
           {/* <div >
@@ -158,111 +146,71 @@ const SignUp = () => {
             </div> */}
         </motion.div>
 
-        {/* Form Section */}
+        {/* Form */}
         <motion.form
           onSubmit={signUp}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.7 }}
           className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
         >
           <h2 className="text-3xl font-bold text-center text-gray-800">
             Create Your Account
           </h2>
 
-          {/* <div className="flex justify-center gap-4">
-            {["student", "recruiter"].map((state) => (
+          {/* Role Toggle */}
+          <div className="flex justify-center gap-4">
+            {["student", "recruiter"].map((r) => (
               <button
+                key={r}
                 type="button"
-                key={state}
                 className={`px-4 py-2 rounded-full font-medium text-sm ${
-                  role === state
-                    ? "bg-gradient-to-r from-teal-500 to-orange-500 text-white"
+                  role === r
+                    ? "bg-gradient-to-r from-teal-500 to-teal-800 text-white"
                     : "bg-gray-100 text-gray-700"
                 }`}
-                onClick={() => setRole(state)}
+                onClick={() => {
+                  setRole(r);
+                  setCompanyAction(null);
+                }}
               >
-                {state.charAt(0).toUpperCase() + state.slice(1)}
+                {r.charAt(0).toUpperCase() + r.slice(1)}
               </button>
             ))}
-          </div> */}
+          </div> 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-                className="w-full border p-2 rounded"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm">
-                  {errors.firstName.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <label className="text-sm font-medium">role</label>
-              <input
-                type="text"
-                name="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-                className="w-full border p-2 rounded"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm">
-                  {errors.firstName.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="text-sm font-medium">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-                className="w-full border p-2 rounded"
-              />
-              {errors.lastName && (
-                <p className="text-red-500 text-sm">
-                  {errors.lastName.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <label className="text-sm font-medium">User Name</label>
-              <input
-                type="text"
-                name="userName"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-                className="w-full border p-2 rounded"
-              />
-              {errors.userName && (
-                <p className="text-red-500 text-sm">
-                  {errors.userName.message}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div>
-            <label className="text-sm font-medium">Email</label>
+          {/* Base Fields */}
+          <div className="grid md:grid-cols-2 gap-4">
             <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("firstName", { required: "First name is required" })}
+              placeholder="First Name"
+              className="w-full border p-2 rounded"
+            />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm">{errors.firstName.message}</p>
+            )}
+
+            <input
+              {...register("lastName", { required: "Last name is required" })}
+              placeholder="Last Name"
+              className="w-full border p-2 rounded"
+            />
+            {errors.lastName && (
+              <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+            )}
+
+            <input
+              {...register("userName", { required: "Username is required" })}
+              placeholder="Username"
+              className="w-full border p-2 rounded"
+            />
+            {errors.userName && (
+              <p className="text-red-500 text-sm">{errors.userName.message}</p>
+            )}
+
+            <input
+              {...register("email", { required: "Email is required" })}
+              placeholder="Email"
               className="w-full border p-2 rounded"
             />
             {errors.email && (
@@ -270,135 +218,100 @@ const SignUp = () => {
             )}
           </div>
 
-          <div>
-            <label className="text-sm font-medium">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full border p-2 rounded"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password.message}</p>
-            )}
-          </div>
+          <input
+            {...register("password", { required: "Password is required" })}
+            type="password"
+            placeholder="Password"
+            className="w-full border p-2 rounded"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
 
+          {/* Recruiter-specific fields */}
           {role === "recruiter" && (
             <div className="space-y-4">
               <div className="flex gap-4">
                 <button
                   type="button"
-                  className="w-1/2 bg-teal-500 text-white py-2 rounded"
                   onClick={() => setCompanyAction("join")}
+                  className={`w-1/2 py-2 rounded text-white ${
+                    companyAction === "join"
+                      ? "bg-teal-600"
+                      : "bg-teal-400 hover:bg-teal-600"
+                  }`}
                 >
                   Join Company
                 </button>
                 <button
                   type="button"
-                  className="w-1/2 bg-orange-500 text-white py-2 rounded"
                   onClick={() => setCompanyAction("create")}
+                  className={`w-1/2 py-2 rounded text-white ${
+                    companyAction === "create"
+                      ? "bg-orange-600"
+                      : "bg-orange-400 hover:bg-orange-600"
+                  }`}
                 >
                   Create Company
                 </button>
               </div>
 
+              {/* Join Company */}
               {companyAction === "join" && (
                 <>
                   <input
-                    type="text"
-                    name="companyCustomId"
-                    value={companyCustomId}
-                    onChange={(e) => setCompanyCustomId(e.target.value)}
-                    required
-                    placeholder="Company Custom Id"
+                    {...register("companyCustomId", {
+                      required: "Company ID is required",
+                    })}
+                    placeholder="Company Custom ID"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="companyCode"
-                    value={companyCode}
-                    onChange={(e) => setCompanyCode(e.target.value)}
-                    required
+                    {...register("companyCode", {
+                      required: "Company Code is required",
+                    })}
                     placeholder="Company Code"
                     className="w-full border p-2 rounded"
                   />
                 </>
               )}
 
+              {/* Create Company */}
               {companyAction === "create" && (
                 <>
                   <input
-                    name="logo"
-                    type="text"
-                    onChange={(e) => setLogo(e.target.value)}
+                    {...register("companyCustomId", {
+                
+                    })}
+                    placeholder="Company Custom ID"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="logoPublicId"
-                    value={logoPublicId}
-                    onChange={(e) => setLogoPublicId(e.target.value)}
-                    required
-                    placeholder="Logo Public Id"
-                    className="w-full border p-2 rounded"
-                  />
-                  <input
-                    type="text"
-                    name="companyName"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    required
-                    placeholder="Company Name"
-                    className="w-full border p-2 rounded"
-                  />
-                  {/* <input
-                    {...register("companyEmail")}
-                    placeholder="Company Email"
-                    className="w-full border p-2 rounded"
-                  /> */}
-                  <input
-                    type="text"
-                    name="companyCode"
-                    value={companyCode}
-                    onChange={(e) => setCompanyCode(e.target.value)}
-                    required
+                    {...register("companyCode", {
+                      required: "Company Code is required",
+                    })}
                     placeholder="Company Code"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="companyCustomId"
-                    value={companyCustomId}
-                    onChange={(e) => setCompanyCustomId(e.target.value)}
-                    
-                    placeholder="Company Custom Id"
+                    {...register("companyName", {
+                      required: "Company Name is required",
+                    })}
+                    placeholder="Company Name"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="companyEmail"
-                    value={companyEmail}
-                    onChange={(e) => setCompanyEmail(e.target.value)}
-                    required
+                    {...register("companyEmail")}
                     placeholder="Company Email"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    {...register("description")}
                     placeholder="Description"
                     className="w-full border p-2 rounded"
                   />
                   <input
-                    type="text"
-                    name="website"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    required
+                    {...register("website")}
                     placeholder="Website"
                     className="w-full border p-2 rounded"
                   />
@@ -407,10 +320,11 @@ const SignUp = () => {
             </div>
           )}
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-600 hover:to-orange-600 text-white py-3 rounded font-semibold transition"
+            className="w-full bg-gradient-to-r from-orange-400 to-orange-800 text-white py-3 rounded font-semibold"
           >
             {isSubmitting ? "Submitting..." : "Sign Up"}
           </button>
