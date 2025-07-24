@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import "./App.css";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import UserLayouts from "./layouts/UserLayouts";
 import LandingPage from "./pages/user/LandingPage";
 import RecruiterLandingPage from "./pages/recruiter/RecruiterLandingPage.jsx";
@@ -36,7 +37,8 @@ import RecruiterProfilePage from "./pages/recruiter/RecruiterProfilePage.jsx";
 import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard.jsx";
 import AddTasksForm from "./pages/recruiter/AddTask.jsx";
 import AddSimulationForm from "./pages/recruiter/CreateSimulation.jsx";
-
+import InternshipDetails from "./pages/recruiter/InternDetails.jsx";
+import RecruiterSimulations from "./pages/recruiter/RecruiterSimulations.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +47,7 @@ function App() {
       element: <HowItWorks />,
     },
     { path: "/contact", element: <ContactPage /> },
+    // ADMIN PATHS
     {
       path: "/admin-sidebar",
       element: <AdminSidebar />,
@@ -73,30 +76,51 @@ function App() {
       path: "/internships",
       element: <InternshipGrid />,
     },
+    // RECRUITERS NOT NESTED
     {
-      path: "/recruiters",
+      path: "/recru",
       element: <Recruiters />,
     },
-    {
-      path: "?recruiter-profile",
-      element: <RecruiterProfilePage/>,
-    },
+    { path: "/recruiter/simulations", element: <RecruiterSimulations/> },
     {
       path: "/recruiter-dashboard",
-      element: <RecruiterDashboard/>,
+      element: <RecruiterDashboard />,
     },
     {
       path: "/add-simulation",
-      element: <AddSimulationForm/>,
+      element: <AddSimulationForm />,
     },
-  {
-    path: "/add-tasks",
-    element: <AddTasksForm/>,
-  },
+    {
+      path: "/add-tasks",
+      element: <AddTasksForm />,
+    },
     {
       path: "/simulations",
       element: <SimulationTable />,
     },
+    // PRIVATE ROUTES
+    {
+      path: "/recruiters-profile",
+      element: <ProtectedRoute roles={["student", "recruiter"]} />,
+      children: [
+        {
+          path: "/recruiters-profile",
+          element: <RecruiterProfilePage />,
+        },
+      ],
+    },
+    {
+      path: "/user",
+      element: <ProtectedRoute roles={["student", "recruiter"]} />,
+      children: [
+        {
+          path: "/user",
+          element: <UserDashboard />,
+        },
+      ],
+    },
+
+    // AUTHENTICATION
     {
       path: "/login",
       element: <LogIn />,
@@ -105,6 +129,11 @@ function App() {
       path: "/sign-up",
       element: <SignUp />,
     },
+    {
+      path: "/internship/:id",
+      element: <InternshipDetails />,
+    },
+    // NESTED PATHS
     {
       path: "/",
       element: <UserLayouts />,
@@ -162,20 +191,18 @@ function App() {
           path: "all-applications",
           element: <Applications />,
         },
-         {
+
+        {
           path: "all-enrollments",
           element: <UserSimulations />,
-        
         },
-         {
+        {
           path: "track-progress",
           element: <UserCertificates />,
-        
         },
-         {
+        {
           path: "settings",
           element: <UserSettings />,
-        
         },
       ],
     },
@@ -187,10 +214,10 @@ function App() {
           index: true,
           element: <RecruiterHero />,
         },
-         {
+        {
           path: "/recruiter/add",
-          element: <AddSimulationForm/>,
-        }
+          element: <AddSimulationForm />,
+        },
       ],
     },
   ]);

@@ -17,7 +17,7 @@ const RecruiterNavbar = () => {
           </span>
         </Link>
       </div>
-      <NavLink
+      {/* <NavLink
         className={({ isActive }) =>
           `flex items-center gap-3 px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
             isActive
@@ -28,7 +28,7 @@ const RecruiterNavbar = () => {
       >
         <UserCircle2 size={20} />
         <span>Profile</span>
-      </NavLink>
+      </NavLink> */}
       <br />
 
       <nav className="flex flex-col gap-4">

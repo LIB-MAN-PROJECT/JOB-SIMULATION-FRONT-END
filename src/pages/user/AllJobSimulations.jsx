@@ -8,6 +8,7 @@ import apiClient from "../../services/config";
 
 const AllJobSimulations = () => {
   const navigate = useNavigate();
+
   const [filters, setFilters] = useState({
     title: "",
     field: "",
@@ -40,6 +41,11 @@ const AllJobSimulations = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  //  No login check — open to all
+  const handleJobClick = (jobId) => {
+    navigate(`/simulations/${jobId}`);
   };
 
   return (
@@ -120,7 +126,7 @@ const AllJobSimulations = () => {
           </select>
         </div>
 
-        {/* Loader */}
+        {/* Loader or Job Cards */}
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <LoadingSpinner />
@@ -134,7 +140,7 @@ const AllJobSimulations = () => {
             {jobs.map((job, index) => (
               <motion.div
                 key={job._id}
-                onClick={() => navigate(`/simulations/${job._id}`)}
+                onClick={() => handleJobClick(job._id)}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

@@ -115,7 +115,13 @@ const K = {
       path: "/dashboard/help",
     },
   ],
+
   RECRUITERLINKS: [
+    {
+      icon: <HomeIcon />,
+      text: "PROFILE",
+      path: "/recruiters-profile",
+    },
     {
       icon: <HomeIcon />,
       text: "DASHBOARD",
@@ -124,7 +130,7 @@ const K = {
     {
       icon: <FcReading />,
       text: "MY SIMULATIONS",
-      path: "/dashboard/simulations",
+      path: "/recruiter/simulations",
     },
     {
       icon: <FcBriefcase />,
@@ -778,7 +784,7 @@ export const user = {
       title: "View All Applications",
       path: "/user/all-applications",
     },
-     {
+    {
       icon: <FaTools className="text-xl text-blue-500" />,
       title: "View All Enrollments",
       path: "/user/all-enrollments",
@@ -788,8 +794,6 @@ export const user = {
       title: "Track All Progress",
       path: "/user/track-progress",
     },
-
-   
   ],
   USERDASHBOARD: [
     {
