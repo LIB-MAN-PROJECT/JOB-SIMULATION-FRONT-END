@@ -46,7 +46,8 @@ import ReviewCompletedEnrollment from "./pages/recruiter/ReviewCompletedEnrollme
 import GenerateCertificatePage from "./pages/recruiter/GenerateCertificateModal.jsx";
 import InternshipCardList from "./pages/recruiter/MyInternships.jsx";
 import MySimulations from "./pages/recruiter/MySimulations.jsx";
-import InternshipDetails from "./pages/recruiter/InternDetails.jsx";
+//  import InternshipDetails from "../pages/recruiter/InternDetails.jsx";
+
 import RecruiterSimulations from "./pages/recruiter/RecruiterSimulations.jsx";
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
       path: "/company-table",
       element: <CompanyTable />,
     },
+    
     {
       path: "/my-internships",
       element: <InternshipCardList />,
@@ -160,10 +162,10 @@ function App() {
       path: "/sign-up",
       element: <SignUp />,
     },
-    {
-      path: "/internship/:id",
-      element: <InternshipDetails />,
-    },
+    // {
+    //   path: "/internship/:id",
+    //   element: <InternshipDetails />,
+    // },
     // NESTED PATHS
     {
       path: "/",

@@ -5,7 +5,7 @@ import { fetchSimulationById } from "../../services/jobs";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import VerifiedBadge from "../../components/VerificationBadge";
 import { handleError } from "../../services/handleError";
-import TaskAccordion from "./Accordion";
+import TaskAccordion from "./TaskAccordion";
 import { HashLink } from "react-router-hash-link";
 
 const fadeInUp = {
