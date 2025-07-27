@@ -93,9 +93,10 @@ function App() {
     },
     // RECRUITERS NOT NESTED
     {
-      path: "/recru",
+      path: "/recruiter",
       element: <Recruiters />,
     },
+    
     { path: "/recruiter/simulations", element: <RecruiterSimulations/> },
     {
       path: "/recruiter-dashboard",
@@ -116,6 +117,10 @@ function App() {
     {
       path: "/review-enrollments/:id",
       element: <ReviewCompletedEnrollment/>,
+    },
+    {
+      path: "/recruiter-profile",
+      element: <RecruiterProfilePage/>,
     },
     
   {

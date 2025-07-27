@@ -18,7 +18,7 @@ export default function ReviewCompletedEnrollment() {
           `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/enrollments/${id}/review`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );

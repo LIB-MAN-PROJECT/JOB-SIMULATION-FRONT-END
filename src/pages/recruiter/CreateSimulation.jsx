@@ -51,10 +51,11 @@ export default function AddSimulationForm() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
-          },
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },   
         }
       );
+      console.log(localStorage.getItem("token"));
       toast.success("Add Tasks Now!");
       navigate(`/add-tasks/${createdSimulation._id}`);
     } catch (error) {

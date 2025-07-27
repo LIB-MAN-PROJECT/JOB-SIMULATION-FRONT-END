@@ -22,7 +22,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     const payload = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -48,7 +48,7 @@ const SignUp = () => {
       setIsSubmitting(true);
       const res = await axios.post(
         "https://job-simulation-backend-3e6w.onrender.com/api/auth/signup",
-        data,
+        payload,
         {
           headers: {
             "Content-Type": "application/json",
@@ -106,14 +106,14 @@ const SignUp = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log(response);
-      localStorage.setItem("accesstoken", response.data.data.token);
+      localStorage.setItem("token", response.data.data.token);
       // setRole(response.data.user.role);
       toast.success("User Registered Successfully");
       // role === "student" ? navigate("/") : ;
       if (role === "student") {
         navigate("/");
       } else {
-        navigate("/recruiter");
+        navigate("/recru");
       }
     } catch (error) {
       console.log(error);
@@ -148,7 +148,7 @@ const SignUp = () => {
 
         {/* Form */}
         <motion.form
-          onSubmit={signUp}
+          onSubmit={handleSubmit(onSubmit)}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -342,3 +342,213 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+
+
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import { useAuth } from "../../services/useAuth";
+// // import { useAuth } from "../../../services/useAuth";
+
+// const SignUp = () => {
+//   const [role, setRole] = useState("student");
+//   const [companyAction, setCompanyAction] = useState("join");
+//   const { login } = useAuth();
+//   const navigate = useNavigate();
+
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm();
+
+//   const onSubmit = async (data) => {
+//     const payload = {
+//       firstName: data.firstName,
+//       lastName: data.lastName,
+//       userName: data.userName,
+//       email: data.email,
+//       password: data.password,
+//       role,
+//     };
+
+//     if (role === "recruiter") {
+//       if (companyAction === "join") {
+//         payload.companyCustomId = data.companyCustomId;
+//         payload.companyCode = data.companyCode;
+//       } else if (companyAction === "create") {
+//         payload.companyName = data.companyName;
+//         payload.companyEmail = data.companyEmail;
+//         payload.companyCode = data.companyCode;
+//         payload.description = data.description;
+//         payload.website = data.website;
+//         payload.companyCustomId = data.companyCustomId;
+//       }
+//     }
+
+//     try {
+//       const response = await axios.post(
+//         "https://job-simulation-backend-3e6w.onrender.com/api/auth/register",
+//         payload
+//       );
+//       toast.success("Registration successful!");
+
+//       const token = response.data.token;
+//       localStorage.setItem("token", token);
+//       login(token);
+//       navigate("/");
+//     } catch (error) {
+//       toast.error(
+//         error.response?.data?.message || "Registration failed. Please try again."
+//       );
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4">
+//       <form
+//         onSubmit={handleSubmit(onSubmit)}
+//         className="w-full max-w-lg bg-white p-8 rounded shadow-md"
+//       >
+//         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+
+//         {/* Role Selection */}
+//         <div className="mb-4">
+//           <label className="block text-gray-700 font-bold mb-2">Role:</label>
+//           <select
+//             value={role}
+//             onChange={(e) => setRole(e.target.value)}
+//             className="w-full p-2 border rounded"
+//           >
+//             <option value="student">Student</option>
+//             <option value="recruiter">Recruiter</option>
+//           </select>
+//         </div>
+
+//         {/* Common Fields */}
+//         <input
+//           {...register("firstName", { required: true })}
+//           placeholder="First Name"
+//           className="w-full mb-3 p-2 border rounded"
+//         />
+//         {errors.firstName && <p className="text-red-500 text-sm">First name is required</p>}
+
+//         <input
+//           {...register("lastName", { required: true })}
+//           placeholder="Last Name"
+//           className="w-full mb-3 p-2 border rounded"
+//         />
+//         {errors.lastName && <p className="text-red-500 text-sm">Last name is required</p>}
+
+//         <input
+//           {...register("userName", { required: true })}
+//           placeholder="Username"
+//           className="w-full mb-3 p-2 border rounded"
+//         />
+//         {errors.userName && <p className="text-red-500 text-sm">Username is required</p>}
+
+//         <input
+//           {...register("email", { required: true })}
+//           placeholder="Email"
+//           type="email"
+//           className="w-full mb-3 p-2 border rounded"
+//         />
+//         {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
+
+//         <input
+//           {...register("password", { required: true })}
+//           placeholder="Password"
+//           type="password"
+//           className="w-full mb-3 p-2 border rounded"
+//         />
+//         {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
+
+//         {/* Recruiter-specific fields */}
+//         {role === "recruiter" && (
+//           <>
+//             <div className="mb-4">
+//               <label className="block text-gray-700 font-bold mb-2">
+//                 Company Action:
+//               </label>
+//               <select
+//                 value={companyAction}
+//                 onChange={(e) => setCompanyAction(e.target.value)}
+//                 className="w-full p-2 border rounded"
+//               >
+//                 <option value="join">Join Existing Company</option>
+//                 <option value="create">Create New Company</option>
+//               </select>
+//             </div>
+
+//             <input
+//               {...register("companyCustomId", { required: true })}
+//               placeholder="Company Custom ID"
+//               className="w-full mb-3 p-2 border rounded"
+//             />
+//             {errors.companyCustomId && (
+//               <p className="text-red-500 text-sm">Company ID is required</p>
+//             )}
+
+//             <input
+//               {...register("companyCode", { required: true })}
+//               placeholder="Company Code"
+//               className="w-full mb-3 p-2 border rounded"
+//             />
+//             {errors.companyCode && (
+//               <p className="text-red-500 text-sm">Company Code is required</p>
+//             )}
+
+//             {companyAction === "create" && (
+//               <>
+//                 <input
+//                   {...register("companyName", { required: true })}
+//                   placeholder="Company Name"
+//                   className="w-full mb-3 p-2 border rounded"
+//                 />
+//                 {errors.companyName && (
+//                   <p className="text-red-500 text-sm">Company name is required</p>
+//                 )}
+
+//                 <input
+//                   {...register("companyEmail", { required: true })}
+//                   placeholder="Company Email"
+//                   type="email"
+//                   className="w-full mb-3 p-2 border rounded"
+//                 />
+//                 {errors.companyEmail && (
+//                   <p className="text-red-500 text-sm">Company email is required</p>
+//                 )}
+
+//                 <input
+//                   {...register("description")}
+//                   placeholder="Company Description"
+//                   className="w-full mb-3 p-2 border rounded"
+//                 />
+
+//                 <input
+//                   {...register("website")}
+//                   placeholder="Company Website"
+//                   className="w-full mb-3 p-2 border rounded"
+//                 />
+//               </>
+//             )}
+//           </>
+//         )}
+
+//         {/* Submit Button */}
+//         <button
+//           type="submit"
+//           className="w-full bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700 transition"
+//         >
+//           Sign Up
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default SignUp;
+

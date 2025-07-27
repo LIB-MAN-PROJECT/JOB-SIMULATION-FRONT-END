@@ -40,7 +40,7 @@ export default function MySimulations() {
         `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/simulations/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );

@@ -30,10 +30,13 @@ const AdminSidebar = () => {
     { name: "Settings", path: "/admin-settings", icon: <Settings size={18} /> },
   ];
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("accessToken");
-  //   navigate("/login");
-  // };
+   const handleLogout = () => {
+    console.log("accessToken",accessToken);
+    console.log("Token",token);
+   localStorage.removeItem("accessToken");
+
+   navigate("/login");
+  };
 
   return (
     <>

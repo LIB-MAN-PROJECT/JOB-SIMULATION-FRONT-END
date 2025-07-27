@@ -117,16 +117,12 @@ const K = {
   ],
 
   RECRUITERLINKS: [
-    {
-      icon: <HomeIcon />,
-      text: "PROFILE",
-      path: "/recruiters-profile",
-    },
-    {
-      icon: <HomeIcon />,
-      text: "PROFILE",
-      path: "/recruiters-profile",
-    },
+    // {
+    //   icon: <HomeIcon />,
+    //   text: "PROFILE",
+    //   path: "/recruiters-profile",
+    // },
+   
     {
       icon: <LayoutDashboard size={18} />,
       text: "DASHBOARD",
@@ -164,11 +160,11 @@ const K = {
       text: "CERTIFICATES",
       path: "/issued-certificates",
     },
-    {
-      icon: <FileText size={18} />,
-      text: "ENROLLMENTS",
-      path: "/completed-enrollments",
-    },
+    // {
+    //   icon: <FileText size={18} />,
+    //   text: "ENROLLMENTS",
+    //   path: "/completed-enrollments",
+    // },
     {
       icon: <FileText size={18} />,
       text: "REVIEW C.E",

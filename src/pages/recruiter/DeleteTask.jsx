@@ -40,7 +40,7 @@ const DeleteTask = () => {
         `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/delete-task/${taskId}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );

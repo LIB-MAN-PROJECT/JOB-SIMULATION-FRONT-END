@@ -25,7 +25,7 @@ const RecruiterProfilePage = () => {
     phoneNumber: "+233 123 456 789",
     email: "CareerLaunch@gmail.com",
     bio: "We Post Simulations and Then Offer Internships After Completion.",
-    accountNumber: "VEN-2024-001",
+    companyCustomId: "REC-2024-001",
   });
 
   const handleEditClick = () => {
@@ -107,7 +107,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Header Section */}
-          <div className="bg-green-200 p-6 md:p-8">
+          <div className="bg-blue-950 p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
                 <User
@@ -151,10 +151,10 @@ const ProfileView = ({ vendorData, onEditClick }) => {
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">
-                    Account Number
+                    Company Custom Id
                   </h3>
                   <p className="text-gray-600 break-all">
-                    {vendorData.accountNumber}
+                    {vendorData.companyCustomId}
                   </p>
                 </div>
               </div>
@@ -242,8 +242,8 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
       newErrors.phoneNumber = "Phone number is required";
     }
 
-    if (!formData.accountNumber?.trim()) {
-      newErrors.accountNumber = "Account number is required";
+    if (!formData.companyCustomId?.trim()) {
+      newErrors.companyCustomId = "Company number is required";
     }
 
     if (!formData.bio?.trim()) {
@@ -334,23 +334,23 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
             {/* Account Number */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Account Number *
+                Company Custom Id *
               </label>
               <input
                 type="text"
-                value={formData.accountNumber || ""}
+                value={formData.companyCustomId || ""}
                 onChange={(e) =>
-                  handleInputChange("accountNumber", e.target.value)
+                  handleInputChange("companyCustomId", e.target.value)
                 }
                 className={`w-full px-4 py-3 border border-yellow-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  errors.accountNumber ? "border-red-500" : "border-gray-300"
+                  errors.companyCustomId ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter account number"
                 disabled={isLoading}
               />
-              {errors.accountNumber && (
+              {errors.companyCustomId && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.accountNumber}
+                  {errors.companyCustomId}
                 </p>
               )}
             </div>

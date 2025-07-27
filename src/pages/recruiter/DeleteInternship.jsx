@@ -57,7 +57,7 @@ const DeleteInternship = () => {
         {
           headers: {
              "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("acesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
