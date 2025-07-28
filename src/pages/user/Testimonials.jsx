@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import user1 from "../../assets/internship.jpeg";
-import user2 from "../../assets/hero-students.jpg";
+import user1 from "../../assets/user2.png";
+import user2 from "../../assets/user1.jpg";
 import user3 from "../../assets/experience.jpg";
 
 const testimonials = [

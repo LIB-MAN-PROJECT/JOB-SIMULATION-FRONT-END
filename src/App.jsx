@@ -44,7 +44,7 @@ import Verify from "./pages/admin/Verify.jsx";
 import CompletedEnrollments from "./pages/recruiter/CompletedEnrollments.jsx";
 import ReviewCompletedEnrollment from "./pages/recruiter/ReviewCompletedEnrollments.jsx";
 import GenerateCertificatePage from "./pages/recruiter/GenerateCertificateModal.jsx";
- import RecruiterInternships from "./pages/recruiter/MyInternships.jsx";
+import RecruiterInternships from "./pages/recruiter/MyInternships.jsx";
 import MySimulations from "./pages/recruiter/MySimulations.jsx";
 //  import InternshipDetails from "../pages/recruiter/InternDetails.jsx";
 
@@ -55,6 +55,8 @@ import ManageRecruiters from "./pages/admin/ManageRecruiters.jsx";
 import ManageCompanies from "./pages/admin/ManageCompanies.jsx";
 import EditSimulation from "./pages/recruiter/EditSimulation.jsx";
 import ReviewCompletedEnrollmentsModal from "./pages/recruiter/ReviewCompletedEnrollmentModal.jsx";
+import InternshipDetails from "./pages/recruiter/InternDetails.jsx";
+import PendingVerification from "./pages/recruiter/PendingVerification.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -72,6 +74,7 @@ function App() {
       path: "/admin-settings",
       element: <AdminSettings />,
     },
+
     // {
     //   path: "/issued-certificates",
     //   element: <CertificatesIssued />,
@@ -86,25 +89,25 @@ function App() {
     },
     {
       path: "/admin-students",
-      element: <ManageStudents/>,
+      element: <ManageStudents />,
     },
     {
       path: "/admin-recruiters",
-      element: <ManageRecruiters/>,
+      element: <ManageRecruiters />,
     },
     {
       path: "/admin-companies",
-      element: <ManageCompanies/>,
+      element: <ManageCompanies />,
     },
     {
       path: "/verify-recruiters",
-      element: <Verify/>,
+      element: <Verify />,
     },
     // {
     //   path: "/company-table",
     //   element: <CompanyTable />,
     // },
-    
+
     {
       path: "/my-internships",
       element: <RecruiterInternships />,
@@ -114,8 +117,8 @@ function App() {
       path: "/recruiter",
       element: <Recruiters />,
     },
-    
-    { path: "/recruiter/simulations", element: <RecruiterSimulations/> },
+
+    { path: "/recruiter/simulations", element: <RecruiterSimulations /> },
     {
       path: "/recruiter-dashboard",
       element: <RecruiterDashboard />,
@@ -126,34 +129,34 @@ function App() {
     },
     {
       path: "/edit-simulation/:id",
-      element: <EditSimulation/>,
+      element: <EditSimulation />,
     },
-      {
+    {
       path: "/create-internship",
-      element: <CreateInternship/>,
+      element: <CreateInternship />,
     },
     {
       path: "/completed-enrollments",
-      element: <CompletedEnrollments/>,
+      element: <CompletedEnrollments />,
     },
     {
       path: "/enrollments",
-      element: <ReviewCompletedEnrollmentsModal/>,
+      element: <ReviewCompletedEnrollmentsModal />,
     },
     {
       path: "/review-enrollments/:id",
-      element: <ReviewCompletedEnrollment/>,
+      element: <ReviewCompletedEnrollment />,
     },
     {
       path: "/recruiter-profile",
-      element: <RecruiterProfilePage/>,
+      element: <RecruiterProfilePage />,
     },
-    
-  {
-    path: "/generate-cert",
-    element: <GenerateCertificatePage/>,
-  },
-  {
+
+    {
+      path: "/generate-cert",
+      element: <GenerateCertificatePage />,
+    },
+    {
       path: "/add-tasks/:id",
       element: <AddTasksForm />,
     },
@@ -161,7 +164,7 @@ function App() {
       path: "/my-simulations",
       element: <MySimulations />,
     },
-    
+
     // PRIVATE ROUTES
     {
       path: "/recruiters-profile",
@@ -193,7 +196,8 @@ function App() {
       path: "/sign-up",
       element: <SignUp />,
     },
-    // {
+    { path: "/pending-verification", element: <PendingVerification /> },
+    // 
     //   path: "/internship/:id",
     //   element: <InternshipDetails />,
     // },
@@ -219,7 +223,12 @@ function App() {
           path: "internship",
           element: <InternshipLandingPage />,
         },
-
+        {
+          path: "all-internships",
+          element: <InternshipGrid />,
+        },
+        { path: "internship/:id", element: <InternshipDetails /> },
+        { path: "recruiter-home", element: <RecruiterLandingPage /> },
         {
           path: "mentorship",
           element: <MentorLanding />,

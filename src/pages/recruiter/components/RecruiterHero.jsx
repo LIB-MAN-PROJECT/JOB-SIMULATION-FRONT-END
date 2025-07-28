@@ -83,7 +83,7 @@ const RecruiterDashboard = () => {
             Tap into a pipeline of job-ready talent today.
           </p>
           <Link
-            to="/create-internship"
+            to="/sign-up"
             className="inline-block bg-white text-teal-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:scale-105 transition-all duration-300"
           >
             Create Recruiter Account

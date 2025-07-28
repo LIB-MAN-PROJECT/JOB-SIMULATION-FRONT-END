@@ -29,7 +29,7 @@ const InternHero = () => {
           </p>
 
           <div>
-            <Link to="/internships">
+            <Link to="/all-internships">
               <button className="mt-4 px-6 py-3 text-sm md:text-base font-semibold bg-gradient-to-r from-teal-500 to-teal-700 text-white rounded-md shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                 Browse Openings
               </button>
