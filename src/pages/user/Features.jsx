@@ -28,7 +28,7 @@ const Features = () => {
         >
           <h2 className="text-3xl md:text-4xl font-extrabold leading-snug">
             Our{" "}
-            <span className="bg-gradient-to-r from-green-500 to-orange-500 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-teal-500 to-teal-800 text-transparent bg-clip-text">
               Core Features
             </span>{" "}
             For Future-Ready Careers
@@ -40,7 +40,7 @@ const Features = () => {
 
         {/* Cards */}
         <div className="grid md:grid-cols-3 gap-10">
-          {K.FEATURES.map(({ title, description }, index) => (
+          {K.FEATURES.map(({ title, description,imageUrl }, index) => (
             <motion.div
               key={title}
               custom={index}
@@ -53,7 +53,7 @@ const Features = () => {
               {/* Replace with imported images later */}
               <div className="h-48 w-full overflow-hidden">
                 <img
-                  src={`https://source.unsplash.com/400x300/?technology,career,${index}`}
+                  src={imageUrl}
                   alt={title}
                   className="w-full h-full object-cover rounded-t-2xl"
                 />

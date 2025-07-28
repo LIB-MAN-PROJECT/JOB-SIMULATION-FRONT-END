@@ -1,12 +1,15 @@
 import UserProfileSidebar from "../pages/user/components/UserProfileSidebar";
 import { Outlet } from "react-router";
 
-const UserProfileLayouts = ({ children }) => {
+const UserProfileLayouts = () => {
   return (
-    <div className="flex"> 
-    
+    <div className="flex">
       <UserProfileSidebar />
-      <main className="ml-72 w-full p-6 min-h-screen">
+
+      <main
+        className="w-full p-4 pt-6 min-h-screen transition-all duration-300
+                   lg:ml-72" // only apply margin on large screens and above
+      >
         <Outlet />
       </main>
     </div>

@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "44K+", label: "Employer projects" },
-  { value: "700+", label: "Educational institutions and training providers" },
-  { value: "272K+", label: "Learner experiences" },
-  { value: "18.4M+", label: "Hours of applied learning" },
+  { value: "4K+", label: "Employer projects" },
+  { value: "50+", label: "Companies and simulation providers" },
+  { value: "2K+", label: "Learner experiences" },
+  { value: "1M+", label: "Hours of applied learning" },
 ];
 
 const ImpactSection = () => {

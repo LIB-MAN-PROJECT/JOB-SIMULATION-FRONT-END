@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { fetchSimulationById } from "../../services/jobs";
+import { fetchSimulationById, enrollforSimulation } from "../../services/jobs";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import VerifiedBadge from "../../components/VerificationBadge";
 import { handleError } from "../../services/handleError";
@@ -22,7 +22,7 @@ const JobSimulationDetails = () => {
 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [hasStarted, setHasStarted] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,6 +40,13 @@ const JobSimulationDetails = () => {
     }
   }, [id]);
 
+  const enroll = () => {
+    enrollforSimulation(id)
+      .then((data) => setHasStarted(true))
+      .catch((err) => handleError(err))
+      .finally(() => setLoading(false));
+  };
+
   const handleStartSimulation = () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -48,7 +55,7 @@ const JobSimulationDetails = () => {
       });
       return;
     }
-    setHasStarted(true);
+    enroll();
   };
 
   if (loading) {
@@ -63,7 +70,7 @@ const JobSimulationDetails = () => {
     return (
       <div className="pt-24 px-4 text-center min-h-screen bg-[#f9f4ee] text-black">
         <h2 className="text-xl font-semibold text-red-500">
-          Job Simulation not found.
+          Kindly log in to view this job simulation.
         </h2>
         <button
           onClick={() => navigate(-1)}
@@ -171,6 +178,7 @@ const JobSimulationDetails = () => {
                     isCompleted={task.isCompleted}
                     content={task.content}
                     resources={task.resources}
+                    taskid={task._id}
                   />
                 ))}
               </div>

@@ -82,7 +82,7 @@ const HowItWorks = () => {
 
             {/* Text Section */}
             <div className="p-6 text-center">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-[#f59e0b] to-[#14b8a6] bg-clip-text text-transparent mb-2">
+              <h3 className="text-xl font-bold bg-gradient-to-r from-teal-400 to-teal-900 bg-clip-text text-transparent mb-2">
                 {step.title}
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">

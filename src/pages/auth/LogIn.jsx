@@ -1,14 +1,10 @@
-//
-
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { jwtDecode } from "jwt-decode";
 import loginGraphic from "../../assets/experience.jpeg";
-import Navbar from "../user/components/Navbar";
 import { useAuth } from "../../services/useAuth";
 
 const LogIn = () => {
@@ -17,6 +13,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const user = useAuth();
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,31 +34,19 @@ const LogIn = () => {
         "https://job-simulation-backend-3e6w.onrender.com/api/auth/login",
         payload
       );
-
+      console.log("Login Response:", res.data);
       const token = res.data.token;
-      localStorage.setItem("token", token);
       toast.success("Login successful!");
+      localStorage.setItem("token", token);
+      login(token);
 
-      login(token); // If you're using context
-
-      // Decode token to get role
-      const decoded = jwtDecode(token);
-      const role = decoded.role; // Ensure the token has a "role" key
-      console.log("Decoded role:", role); // Check if this logs correctly
-      // Navigate based on user role
-      if (decoded.role === "student") {
-        navigate("/");
-      } else if (decoded.role === "recruiter") {
-        navigate("/recruiter");
-      } else if (decoded.role === "admin") {
-        navigate("/admin");
-      } else {
+      if (user) {
         navigate("/");
       }
+      // const redirectPath = location.state?.from || "/";
+      // navigate(redirectPath, { replace: true });
     } catch (err) {
       toast.error("Login failed. Please check credentials.");
-      console.error(err);
-      navigate("/login");
     } finally {
       setIsSubmitting(false);
     }
@@ -69,7 +54,7 @@ const LogIn = () => {
 
   return (
     <section className="min-h-screen bg-[#f9f4ee] flex items-center justify-center px-6 py-20 relative">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="absolute inset-0 z-0">
         <img
           src={loginGraphic}
@@ -130,6 +115,7 @@ const LogIn = () => {
           </motion.button>
         </form>
 
+        {/* Sign Up link */}
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{" "}
           <Link
@@ -137,6 +123,15 @@ const LogIn = () => {
             className="text-teal-600 font-semibold hover:underline"
           >
             Sign up
+          </Link>
+        </p>
+       <p className="mt-6 text-center text-sm text-gray-600">
+          Go back to the {" "}
+          <Link
+            to="/"
+            className="text-teal-600 font-semibold hover:underline"
+          >
+            Homepage
           </Link>
         </p>
       </motion.div>

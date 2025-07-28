@@ -13,13 +13,12 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        if (decoded.exp * 1000 > Date.now()) {
+
+        if (decoded) {
           setUser(decoded);
-        } else {
-          localStorage.removeItem("token");
         }
       } catch {
-        localStorage.removeItem("token");
+        console.log("error");
       }
     }
     setLoading(false);
@@ -28,13 +27,14 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem("token", token);
     const decoded = jwtDecode(token);
-    console.log("token",token)
+
+    localStorage.setItem("user", JSON.stringify(decoded));
     setUser(decoded);
   };
-  
-    
+
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 

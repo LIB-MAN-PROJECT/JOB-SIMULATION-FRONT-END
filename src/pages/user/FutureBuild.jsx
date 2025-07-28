@@ -18,25 +18,26 @@ const FutureBuild = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-[#050c2a] rounded-3xl border border-white/10 shadow-xl px-10 py-16 text-center text-white relative overflow-hidden"
+          className="bg-white rounded-3xl border border-white/10 shadow-xl px-10 py-16 text-center text-black relative overflow-hidden"
         >
           {/* Pulsing Gradient Ball */}
-          <div className="absolute -top-16 -right-16 w-64 h-64 bg-gradient-to-br from-green-400 to-orange-500 opacity-30 rounded-full blur-3xl animate-pulse z-0"></div>
+          <div className="absolute -top-16 -right-16 w-64 h-64 bg-gradient-to-br from-teal-400 to-teal-800 opacity-30 rounded-full blur-3xl animate-pulse z-0"></div>
 
           <div className="relative z-10">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-snug mb-4 tracking-tight">
               Ready to Build Your{" "}
-              <span className="bg-gradient-to-r from-green-400 to-orange-400 text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-teal-400 to-teal-800 text-transparent bg-clip-text">
                 Future
               </span>
               ?
             </h1>
-            <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Join a growing platform where skills meet opportunity. Simulate. Showcase. Get hired.
+            <p className="mt-4 text-lg text-black max-w-2xl mx-auto leading-relaxed">
+              Join a growing platform where skills meet opportunity. Simulate.
+              Showcase. Get hired.
             </p>
 
             <Link to="/sign-up">
-              <button className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-orange-500 hover:from-green-600 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:scale-105 transition-all duration-300">
+              <button className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-teal-900 hover:from-teal-900 hover:to-teal-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:scale-105 transition-all duration-300">
                 Get Started
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -46,14 +47,19 @@ const FutureBuild = () => {
                   stroke="currentColor"
                   className="w-5 h-5 group-hover:scale-110 transition-transform"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L21 12l-3.75 5.25M3 12h18" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.25 6.75L21 12l-3.75 5.25M3 12h18"
+                  />
                 </svg>
               </button>
             </Link>
 
             {/* Trust line */}
             <p className="mt-6 text-xs text-gray-400">
-              Trusted by students, recruiters, and career platforms across Africa.
+              Trusted by students, recruiters, and career platforms across
+              Africa.
             </p>
           </div>
         </motion.div>

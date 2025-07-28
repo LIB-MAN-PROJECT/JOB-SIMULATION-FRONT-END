@@ -11,10 +11,8 @@ export const fetchAllSimulations = async () => {
   }
 };
 
-
-
 // export const fetchSimulationById = async (id) => {
-//   // const token = localStorage.getItem("token"); // or "token" — match your login key
+//   // const token = localStorage.getItem("token"); // or "accessToken" — match your login key
 
 //   // if (!token) {
 //   //   throw new Error("No token found. Please login first.");
@@ -31,14 +29,66 @@ export const fetchAllSimulations = async () => {
 
 // /services/jobs.js
 
-
+export const enrollforSimulation = async (id) => {
+  try {
+    const res = await apiClient.post(`/user/simulation/${id}/enroll`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.data.message;
+  } catch (err) {
+    handleError(err);
+    throw err;
+  }
+};
 
 export const fetchSimulationById = async (id) => {
-  const res = await apiClient.get(`/user/view-simulations/${id}`); // ✅ No need to pass headers manually
+  const res = await apiClient.get(`/user/view-simulations/${id}`); //  No need to pass headers manually
   return res.data;
 };
 
-
+// user profile
+export const fetchUserStats = async () => {
+  try {
+    const res = await apiClient.get("/user/profile/stats");
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
+export const fetchUserProfiles = async () => {
+  try {
+    const res = await apiClient.get("/user/profile/stats");
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
+export const fetchUserEnrollments = async () => {
+  try {
+    const res = await apiClient.get("/user/profile/enrollments");
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
+export const fetchUserApplication = async () => {
+  try {
+    const res = await apiClient.get("/user/profile/stats");
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
+export const fetchUserCertificates = async () => {
+  try {
+    const res = await apiClient.get("/user/profile/certificates");
+    return res.data;
+  } catch (err) {
+    handleError(err);
+  }
+};
 // --- Internships ---
 export const fetchAllInternships = async () => {
   try {
@@ -104,23 +154,22 @@ export const applyToInternship = async (id, formData) => {
     throw err;
   }
 };
+export const submitTask = async (id, formData) => {
+  try {
+    const res = await apiClient.post(
+      `/user/simulation/${id}/task/${id}/submit-task`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return res.data.message;
+  } catch (err) {
+    handleError(err);
+    throw err;
+  }
+};
 
 // --- Certificates ---
-export const fetchUserCertificates = async () => {
-  try {
-    const res = await apiClient.get("/certificates/me");
-    return res.data;
-  } catch (err) {
-    handleError(err);
-  }
-};
-
-// --- User Profile ---
-export const fetchUserProfile = async () => {
-  try {
-    const res = await apiClient.get("/auth/profile");
-    return res.data;
-  } catch (err) {
-    handleError(err);
-  }
-};

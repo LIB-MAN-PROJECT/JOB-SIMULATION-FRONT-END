@@ -1,24 +1,27 @@
-import { HomeIcon, FileText, Users, HelpCircle, LayoutDashboard, BookOpenCheck, Briefcase, UserPen } from "lucide-react";
+import { HomeIcon, FileText, Users, HelpCircle } from "lucide-react";
 import { FcBriefcase, FcProcess, FcReading } from "react-icons/fc";
 import { FaTools, FaChartBar, FaBullhorn, FaComments } from "react-icons/fa";
 
 const K = {
   FEATURES: [
     {
+      imageUrl:
+        "https://cdn.pixabay.com/photo/2021/09/19/00/05/work-6636491_960_720.png",
       title: "Job Simulations",
       description:
         "Participate in role based simulations tailored to your field.",
     },
     {
+      imageUrl:
+        "https://cdn.pixabay.com/photo/2024/08/03/10/09/business-8941891_960_720.jpg",
       title: "Internship & Job Board",
       description:
         "Explore and apply to real opportunities provided by partner companies.",
     },
+
     {
-      title: "Mentor Assistance",
-      description: "Access expert guidance from mentors during simulations.",
-    },
-    {
+      imageUrl:
+        "https://cdn.pixabay.com/photo/2022/01/03/19/03/certificate-6913406_1280.png",
       title: "E-Certificates",
       description:
         "Earn downloadable,verifiable certificates with each simulation.",
@@ -71,12 +74,12 @@ const K = {
     },
     {
       text: "RECRUITERS",
-      path: "/recruiter",
+      path: "/recruiter-home",
     },
-    {
-      text: "MENTORSHIPS",
-      path: "/mentorship",
-    },
+    // {
+    //   text: "MENTORSHIPS",
+    //   path: "/mentorship",
+    // },
     {
       text: "CONTACT",
       path: "/contact",
@@ -117,75 +120,31 @@ const K = {
   ],
 
   RECRUITERLINKS: [
-    // {
-    //   icon: <HomeIcon />,
-    //   text: "PROFILE",
-    //   path: "/recruiters-profile",
-    // },
-   
     {
-      icon: <LayoutDashboard size={18} />,
+      icon: <HomeIcon />,
+      text: "PROFILE",
+      path: "/recruiters-profile",
+    },
+    {
+      icon: <HomeIcon />,
       text: "DASHBOARD",
       path: "/recruiter-dashboard",
     },
     {
-      icon: <BookOpenCheck size={18} />,
+      icon: <FcReading />,
       text: "MY SIMULATIONS",
-      path: "/my-simulations",
+      path: "/recruiter/simulations",
     },
-     {
-      icon: <BookOpenCheck size={18} />,
-      text: "MY INTERNSHIPS",
-      path: "/my-internships",
-    },
-    // {
-    //   icon: <BookOpenCheck size={18} />,
-    //   text: "MY INTERNSHIPS",
-    //   path: "/my-internships",
-    // },
-   
     {
-      icon: <BookOpenCheck size={18} />,
-      text: "ADD SIMULATION",
+      icon: <FcBriefcase />,
+      text: "WANT TO ADD A SIMULATION",
       path: "/add-simulation",
     },
-   
-    {
-      icon: <Briefcase size={18} />,
-      text: "ADD INTERNSHIP",
-      path: "/create-internship",
-    },
-    {
-      icon: <FileText size={18} />,
-      text: "CERTIFICATES",
-      path: "/issued-certificates",
-    },
-    {
-      icon: <FileText size={18} />,
-      text: "GENERATE CERT",
-      path: "/generate-cert",
-    },
-    // {
-    //   icon: <FileText size={18} />,
-    //   text: "ENROLLMENTS",
-    //   path: "/completed-enrollments",
-    // },
-    {
-      icon: <FileText size={18} />,
-      text: "REVIEW C.E",
-      path: "/review-enrollments",
-    },
-    {
-      icon: <UserPen size={20} />,
-      text: "PROFILE",
-      path: "/recruiter-profile",
-    },
-
 
     {
       icon: <HelpCircle />,
       text: "NEED HELP?",
-      path: "/contact",
+      path: "/dashboard/help",
     },
   ],
   ADMINLINKS: [
