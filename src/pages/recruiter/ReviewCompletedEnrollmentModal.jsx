@@ -44,7 +44,7 @@ export default function ReviewCompletedEnrollmentsModal({ isOpen, onClose }) {
         { feedback },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );

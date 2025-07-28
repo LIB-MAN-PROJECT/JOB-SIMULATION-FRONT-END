@@ -14,7 +14,7 @@ export const fetchAllSimulations = async () => {
 
 
 // export const fetchSimulationById = async (id) => {
-//   // const token = localStorage.getItem("token"); // or "accessToken" — match your login key
+//   // const token = localStorage.getItem("token"); // or "token" — match your login key
 
 //   // if (!token) {
 //   //   throw new Error("No token found. Please login first.");

@@ -10,11 +10,13 @@ const RNavbar = () => {
   const navigate = useNavigate();
   const [showCertModal, setShowCertModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
+
+  const token = localStorage.getItem("token");
   
-  console.log("accessToken",accessToken);
-    console.log("Token",token);
+  console.log("token",token);
+    console.log("token",token);
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("token");
     navigate("/login");
   };
 

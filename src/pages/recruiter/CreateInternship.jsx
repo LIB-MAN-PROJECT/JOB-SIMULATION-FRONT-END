@@ -45,7 +45,7 @@ const CreateInternship = () => {
       );
 
       toast.success("Internship created successfully!");
-      navigate("/recruiter");
+      navigate("/my-internships");
     } catch (error) {
       console.error(error);
       toast.error("Failed to create internship");

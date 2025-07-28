@@ -5,7 +5,7 @@ import { LogOut, UserCircle2, Settings2, Settings, UserPen } from "lucide-react"
 const RecruiterNavbar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("token");
     navigate("/login");
   };
   return (

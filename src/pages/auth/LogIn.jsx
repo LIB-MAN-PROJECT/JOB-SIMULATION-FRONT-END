@@ -1,4 +1,4 @@
-// 
+//
 
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import loginGraphic from "../../assets/experience.jpeg";
 import Navbar from "../user/components/Navbar";
 import { useAuth } from "../../services/useAuth";
@@ -39,9 +39,9 @@ const LogIn = () => {
       );
 
       const token = res.data.token;
+      localStorage.setItem("token", token);
       toast.success("Login successful!");
 
-      localStorage.setItem("token", token);
       login(token); // If you're using context
 
       // Decode token to get role
@@ -49,11 +49,11 @@ const LogIn = () => {
       const role = decoded.role; // Ensure the token has a "role" key
       console.log("Decoded role:", role); // Check if this logs correctly
       // Navigate based on user role
-      if (res.data.role === "student") {
+      if (decoded.role === "student") {
         navigate("/");
-      } else if (res.data.role === "recruiter") {
+      } else if (decoded.role === "recruiter") {
         navigate("/recruiter");
-      } else if (res.data.role === "admin") {
+      } else if (decoded.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
@@ -61,7 +61,7 @@ const LogIn = () => {
     } catch (err) {
       toast.error("Login failed. Please check credentials.");
       console.error(err);
-      navigate("/");
+      navigate("/login");
     } finally {
       setIsSubmitting(false);
     }

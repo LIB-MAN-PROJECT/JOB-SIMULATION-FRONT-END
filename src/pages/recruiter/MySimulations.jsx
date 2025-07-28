@@ -12,11 +12,13 @@ export default function MySimulations() {
   useEffect(() => {
     const fetchSimulations = async () => {
       try {
+      
+
         const res = await axios.get(
           "https://job-simulation-backend-3e6w.onrender.com/api/recruiter/profile/overview/simulations",
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -37,7 +39,7 @@ export default function MySimulations() {
 
     try {
       await axios.delete(
-        `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/simulations/${id}`,
+        `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/delete-job-simulation/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -22,7 +22,7 @@ export default function GenerateCertificateModal({ isOpen, onClose }) {
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );

@@ -1,76 +1,224 @@
-import React from "react";
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import RecruiterNavbar from "./components/RecruiterNavbar";
+
+// export default function Internships() {
+//   const [internships, setInternships] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const navigate = useNavigate();
+
+//   // Fetch all internships
+//   useEffect(() => {
+//     const fetchInternships = async () => {
+//       try {
+//         // Update endpoint for fetching internships
+//         const res = await axios.get(
+//           "https://job-simulation-backend-3e6w.onrender.com/api/recruiter/profile/overview/simulations/internships",
+//           {
+//             headers: {
+//               Authorization: `Bearer ${localStorage.getItem("token")}`,
+//             },
+//           }
+//         );
+//         setInternships(res.data.data || []);
+//       } catch (error) {
+//         console.error(error);
+//         toast.error("Failed to load internships");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchInternships();
+//   }, []);
+
+//   // Delete internship
+//   const handleDelete = async (id) => {
+//     if (!window.confirm("Are you sure you want to delete this internship?")) return;
+
+//     try {
+//       await axios.delete(
+//         `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/delete-internship/${id}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${localStorage.getItem("token")}`,
+//           },
+//         }
+//       );
+//       toast.success("Internship deleted");
+//       setInternships((prev) => prev.filter((intern) => intern._id !== id));
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to delete internship");
+//     }
+//   };
+
+//   return (
+//     <>
+//       <RecruiterNavbar />
+//       <div className="max-w-5xl mx-auto p-6">
+//         <h2 className="text-2xl font-bold mb-6 text-green-600">My Internships</h2>
+
+//         {loading ? (
+//           <p>Loading internships...</p>
+//         ) : internships.length === 0 ? (
+//           <p>No internships found.</p>
+//         ) : (
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//             {internships.map((intern) => (
+//               <div
+//                 key={intern._id}
+//                 className="border rounded shadow p-4 bg-white space-y-3"
+//               >
+//                 <h3 className="text-lg font-semibold">{intern.title}</h3>
+//                 <p className="text-gray-600">{intern.description}</p>
+//                 <p><strong>Field:</strong> {intern.field}</p>
+//                 <p><strong>Location:</strong> {intern.location}</p>
+//                 <p><strong>Mode:</strong> {intern.mode}</p>
+//                 <p>
+//                   <strong>Status:</strong>{" "}
+//                   {intern.isPublished ? "Published" : "Unpublished"}
+//                 </p>
+//                 <div className="flex gap-2 mt-2">
+//                   <button
+//                     onClick={() => navigate(`/edit-internship/${intern._id}`)}
+//                     className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+//                   >
+//                     Edit
+//                   </button>
+//                   <button
+//                     onClick={() => handleDelete(intern._id)}
+//                     className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+//                   >
+//                     Delete
+//                   </button>
+//                   <button
+//                     onClick={() => navigate(`/view-applications/${intern._id}`)}
+//                     className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+//                   >
+//                     Applications
+//                   </button>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
+
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import RecruiterNavbar from "./components/RecruiterNavbar";
 
+export default function Internships() {
+  const [internships, setInternships] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-const internships = [
-  {
-    id: 1,
-    title: "Frontend Developer Intern",
-    company: "TechNova",
-    location: "Remote",
-    duration: "3 Months",
-    stipend: "GHS 800",
-    status: "Open",
-  },
-  {
-    id: 2,
-    title: "Marketing Intern",
-    company: "BrandSpark",
-    location: "Accra",
-    duration: "6 Weeks",
-    stipend: "GHS 500",
-    status: "Closed",
-  },
-  {
-    id: 3,
-    title: "UI/UX Design Intern",
-    company: "DesignMate",
-    location: "Kumasi",
-    duration: "2 Months",
-    stipend: "GHS 700",
-    status: "Open",
-  },
-];
+  // Fetch all internships
+  useEffect(() => {
+    const fetchInternships = async () => {
+      try {
+        // ✅ Corrected endpoint: internships list
+        const res = await axios.get(
+          "https://job-simulation-backend-3e6w.onrender.com/api/recruiter/internships",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setInternships(res.data.data || []);
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to load internships");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-export default function InternshipCardList() {
+    fetchInternships();
+  }, []);
+
+  // Delete internship
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this internship?")) return;
+
+    try {
+      await axios.delete(
+        `https://job-simulation-backend-3e6w.onrender.com/api/recruiter/delete-internship/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      toast.success("Internship deleted");
+      setInternships((prev) => prev.filter((intern) => intern._id !== id));
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete internship");
+    }
+  };
+
   return (
     <>
-    <RecruiterNavbar/>
-    <div className="p-4 mt-10 ml-67">
-      <h2 className="text-2xl font-semibold mb-4">Internship Opportunities</h2>
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {internships.map((internship) => (
-          <div
-            key={internship.id}
-            className="bg-white rounded-xl shadow p-5 hover:shadow-lg transition"
-          >
-            
-            <h3 className="text-lg font-bold text-gray-800">
-              {internship.title}
-            </h3>
-            <p className="text-sm text-gray-600">{internship.company}</p>
-            <p className="text-sm text-gray-500">{internship.location}</p>
+      <RecruiterNavbar />
+      <div className="max-w-5xl mx-auto p-6">
+        <h2 className="text-2xl font-bold mb-6 text-green-600">My Internships</h2>
 
-            <div className="mt-3 text-sm text-gray-700 space-y-1">
-              <p><strong>Duration:</strong> {internship.duration}</p>
-              <p><strong>Stipend:</strong> {internship.stipend}</p>
-              <p>
-                <strong>Status:</strong>{" "}
-                <span
-                  className={`inline-block px-2 py-1 text-xs rounded-full ${
-                    internship.status === "Open"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {internship.status}
-                </span>
-              </p>
-            </div>
+        {loading ? (
+          <p>Loading internships...</p>
+        ) : internships.length === 0 ? (
+          <p>No internships found.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {internships.map((intern) => (
+              <div
+                key={intern._id}
+                className="border rounded shadow p-4 bg-white space-y-3"
+              >
+                <h3 className="text-lg font-semibold">{intern.title}</h3>
+                <p className="text-gray-600">{intern.description}</p>
+                <p><strong>Field:</strong> {intern.field}</p>
+                <p><strong>Location:</strong> {intern.location}</p>
+                <p><strong>Mode:</strong> {intern.mode}</p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  {intern.isPublished ? "Published" : "Unpublished"}
+                </p>
+                <div className="flex gap-2 mt-2">
+                  <button
+                    onClick={() => navigate(`/edit-internship/${intern._id}`)}
+                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(intern._id)}
+                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => navigate(`/view-applications/${intern._id}`)}
+                    className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                  >
+                    Applications
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
-    </div>
     </>
   );
 }

@@ -55,7 +55,7 @@ export default function ReviewCompletedEnrollment() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
           },
         }

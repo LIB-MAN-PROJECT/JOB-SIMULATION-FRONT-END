@@ -16,11 +16,11 @@ import LogIn from "./pages/auth/LogIn";
 import SignUp from "./pages/auth/SignUp";
 import AdminSidebar from "./pages/admin/compoments/AdminSidebar";
 import AdminSettings from "./pages/admin/AdminSettings";
-import CertificatesIssued from "./pages/recruiter/CertificateIssued.jsx";
-import CertificateTable from "./pages/recruiter/CertificatesTable.jsx"
+// import CertificatesIssued from "./pages/recruiter/CertificateIssued.jsx";
+// import CertificateTable from "./pages/recruiter/CertificatesTable.jsx"
 
-import AdminDashboard from "./pages/admin/Dashboard";
-import CompanyTable from "./pages/admin/compoments/CompanyTable";
+// import AdminDashboard from "./pages/admin/Dashboard";
+// import CompanyTable from "./pages/admin/compoments/CompanyTable";
 // import InternshipCardList from "./pages/admin/compoments/InternshipTable";
 import Recruiters from "./pages/admin/Verify.jsx";
 // import SimulationTable from "./pages/admin/compoments/Simulations";
@@ -40,15 +40,20 @@ import AddTasksForm from "./pages/recruiter/AddTask.jsx";
 import AddSimulationForm from "./pages/recruiter/CreateSimulation.jsx";
 import CreateInternship from "./pages/recruiter/CreateInternship.jsx";
 import Verify from "./pages/admin/Verify.jsx";
-import CertificatesTable from "./pages/recruiter/CertificatesTable.jsx";
+// import CertificatesTable from "./pages/recruiter/CertificatesTable.jsx";
 import CompletedEnrollments from "./pages/recruiter/CompletedEnrollments.jsx";
 import ReviewCompletedEnrollment from "./pages/recruiter/ReviewCompletedEnrollments.jsx";
 import GenerateCertificatePage from "./pages/recruiter/GenerateCertificateModal.jsx";
-import InternshipCardList from "./pages/recruiter/MyInternships.jsx";
+ import RecruiterInternships from "./pages/recruiter/MyInternships.jsx";
 import MySimulations from "./pages/recruiter/MySimulations.jsx";
 //  import InternshipDetails from "../pages/recruiter/InternDetails.jsx";
 
 import RecruiterSimulations from "./pages/recruiter/RecruiterSimulations.jsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import ManageStudents from "./pages/admin/ManageStudents.jsx";
+import ManageRecruiters from "./pages/admin/ManageRecruiters.jsx";
+import ManageCompanies from "./pages/admin/ManageCompanies.jsx";
+import EditSimulation from "./pages/recruiter/EditSimulation.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -66,30 +71,42 @@ function App() {
       path: "/admin-settings",
       element: <AdminSettings />,
     },
-    {
-      path: "/issued-certificates",
-      element: <CertificatesIssued />,
-    },
-    {
-      path: "/certificate-table",
-      element: <CertificatesTable/>,
-    },
+    // {
+    //   path: "/issued-certificates",
+    //   element: <CertificatesIssued />,
+    // },
+    // {
+    //   path: "/certificate-table",
+    //   element: <CertificatesTable/>,
+    // },
     {
       path: "/admin",
       element: <AdminDashboard />,
     },
     {
+      path: "/admin-students",
+      element: <ManageStudents/>,
+    },
+    {
+      path: "/admin-recruiters",
+      element: <ManageRecruiters/>,
+    },
+    {
+      path: "/admin-companies",
+      element: <ManageCompanies/>,
+    },
+    {
       path: "/verify-recruiters",
       element: <Verify/>,
     },
-    {
-      path: "/company-table",
-      element: <CompanyTable />,
-    },
+    // {
+    //   path: "/company-table",
+    //   element: <CompanyTable />,
+    // },
     
     {
       path: "/my-internships",
-      element: <InternshipCardList />,
+      element: <RecruiterInternships />,
     },
     // RECRUITERS NOT NESTED
     {
@@ -105,6 +122,10 @@ function App() {
     {
       path: "/add-simulation",
       element: <AddSimulationForm />,
+    },
+    {
+      path: "/edit-simulation/:id",
+      element: <EditSimulation/>,
     },
       {
       path: "/create-internship",
