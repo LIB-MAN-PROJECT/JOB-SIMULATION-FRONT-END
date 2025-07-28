@@ -4,6 +4,7 @@ import { LogOut, UserCircle2, FileCheck2, ClipboardList } from "lucide-react";
 // import GenerateCertificateModal from "./GenerateCertificateModal"; // modal component
 // import ReviewEnrollmentsModal from "../ReviewEnrollmentsModal"; // modal component
 import GenerateCertificateModal from "../GenerateCertificateModal";
+import ReviewCompletedEnrollmentsModal from "../ReviewCompletedEnrollmentModal";
 import ReviewCompletedEnrollment from "../ReviewCompletedEnrollments";
 
 const RNavbar = () => {
@@ -65,7 +66,7 @@ const RNavbar = () => {
         <GenerateCertificateModal onClose={() => setShowCertModal(false)} isOpen={() => setShowCertModal(true)} />
       )}
       {showReviewModal && (
-        <ReviewEnrollmentsModal onClose={() => setShowReviewModal(false)} />
+        <ReviewCompletedEnrollmentsModal onClose={() => setShowReviewModal(false)} isOpen={showReviewModal} />
       )}
     </div>
   );

@@ -152,13 +152,18 @@ const K = {
    
     {
       icon: <Briefcase size={18} />,
-      text: "CREATE INTERNSHIP",
+      text: "ADD INTERNSHIP",
       path: "/create-internship",
     },
     {
       icon: <FileText size={18} />,
       text: "CERTIFICATES",
       path: "/issued-certificates",
+    },
+    {
+      icon: <FileText size={18} />,
+      text: "GENERATE CERT",
+      path: "/generate-cert",
     },
     // {
     //   icon: <FileText size={18} />,

@@ -128,7 +128,7 @@ export default function Internships() {
       try {
         // ✅ Corrected endpoint: internships list
         const res = await axios.get(
-          "https://job-simulation-backend-3e6w.onrender.com/api/recruiter/internships",
+          "https://job-simulation-backend-3e6w.onrender.com/api/recruiter/profile/overview/internships",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

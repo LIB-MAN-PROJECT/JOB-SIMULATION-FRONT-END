@@ -54,6 +54,7 @@ import ManageStudents from "./pages/admin/ManageStudents.jsx";
 import ManageRecruiters from "./pages/admin/ManageRecruiters.jsx";
 import ManageCompanies from "./pages/admin/ManageCompanies.jsx";
 import EditSimulation from "./pages/recruiter/EditSimulation.jsx";
+import ReviewCompletedEnrollmentsModal from "./pages/recruiter/ReviewCompletedEnrollmentModal.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -134,6 +135,10 @@ function App() {
     {
       path: "/completed-enrollments",
       element: <CompletedEnrollments/>,
+    },
+    {
+      path: "/enrollments",
+      element: <ReviewCompletedEnrollmentsModal/>,
     },
     {
       path: "/review-enrollments/:id",

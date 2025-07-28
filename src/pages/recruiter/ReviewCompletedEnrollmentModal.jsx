@@ -22,7 +22,8 @@ export default function ReviewCompletedEnrollmentsModal({ isOpen, onClose }) {
           },
         }
       );
-      setEnrollments(res.data?.enrollments || []);
+     const filteredData = res.data?.data.filter((item)=> item?.progress == 100)
+  setEnrollments(filteredData)
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch completed enrollments");
@@ -76,8 +77,8 @@ export default function ReviewCompletedEnrollmentsModal({ isOpen, onClose }) {
               key={enrollment._id}
               className="border p-4 rounded mb-4 shadow-sm bg-gray-50"
             >
-              <p><strong>User:</strong> {enrollment.user?.userName || "Unknown"}</p>
-              <p><strong>Simulation:</strong> {enrollment.simulation?.title || "Unknown"}</p>
+              <p><strong>User:</strong> {enrollment.userId?.firstName || "Unknown"}</p>
+              <p><strong>Simulation:</strong> {enrollment.simulationId?.title || "Unknown"}</p>
 
               <textarea
                 className="w-full mt-2 p-2 border rounded"
