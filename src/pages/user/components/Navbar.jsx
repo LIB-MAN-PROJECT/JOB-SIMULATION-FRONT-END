@@ -20,9 +20,10 @@ const Navbar = () => {
       return "/user";
     } else if (user?.role === "recruiter") {
       if (user.isVerified) {
-        return "/recruiter";
+        return "/recruiter-dashboard";
       }
-      return "/pending-verification";
+      // return "/pending-verification";
+       return "/recruiter-dashboard";
     }
 
     return "/";
