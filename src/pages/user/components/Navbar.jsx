@@ -12,9 +12,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-
   console.log(user);
-  
+
   const isVerified = () => {
     if (user?.role === "student") {
       return "/user";
@@ -22,8 +21,8 @@ const Navbar = () => {
       if (user.isVerified) {
         return "/recruiter-dashboard";
       }
-      // return "/pending-verification";
-       return "/recruiter-dashboard";
+
+      return "/pending-verification";
     }
 
     return "/";
