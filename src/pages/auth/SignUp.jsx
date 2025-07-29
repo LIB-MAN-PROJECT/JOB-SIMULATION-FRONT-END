@@ -195,7 +195,7 @@ const SignUp = () => {
                       : "bg-teal-400 hover:bg-teal-600"
                   }`}
                 >
-                  Join Company
+                  Join an Existing Company
                 </button>
                 <button
                   type="button"
