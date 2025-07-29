@@ -14,6 +14,7 @@ const Navbar = () => {
 
   console.log(user);
 
+  
   const isVerified = () => {
     if (user?.role === "student") {
       return "/user";
